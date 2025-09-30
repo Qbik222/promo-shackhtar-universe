@@ -463,4 +463,86 @@
     // loadTranslations()
     //     .then(init) // запуск ініту сторінки
 
+
+    function initCountdownTimer(selector) {
+        const parent = document.querySelector(selector);
+        if (!parent) return;
+
+        const targetAttr = parent.getAttribute('data-target') || '';
+        const targetTime = isNaN(Date.parse(targetAttr))
+            ? (parseInt(targetAttr) || 0)
+            : Date.parse(targetAttr);
+        if (!targetTime) return;
+
+        parent.innerHTML = `
+    <div class="countdown">
+      <span class="unit"><span class="value">00</span><span class="label">Д</span></span>
+      <span class="sep">:</span>
+      <span class="unit"><span class="value">00</span><span class="label">Г</span></span>
+      <span class="sep">:</span>
+      <span class="unit"><span class="value">00</span><span class="label">Х</span></span>
+    </div>
+    <div class="progress"><div class="progress__bar"></div></div>
+  `;
+
+        const values = parent.querySelectorAll('.value');
+        const progressBar = parent.querySelector('.progress__bar');
+
+        let initialDiff = null;
+        let timerId = null;
+
+        function formatNumber(n) {
+            return String(n).padStart(2, '0');
+        }
+
+        function updateTimer() {
+            const now = Date.now();
+            let diff = Math.max(0, targetTime - now);
+
+            if (initialDiff === null) {
+                initialDiff = diff || 1;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            diff -= days * 24 * 60 * 60 * 1000;
+
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            diff -= hours * 60 * 60 * 1000;
+
+            const minutes = Math.floor(diff / (1000 * 60));
+
+            values[0].textContent = formatNumber(days);
+            values[1].textContent = formatNumber(hours);
+            values[2].textContent = formatNumber(minutes);
+
+            const percent = Math.min(100, Math.round(100 * (1 - (targetTime - now) / initialDiff)));
+            progressBar.style.width = percent + '%';
+
+            if (now >= targetTime) {
+                clearInterval(timerId);
+                progressBar.style.width = '100%';
+            }
+        }
+
+        updateTimer();
+        timerId = setInterval(updateTimer, 1000);
+    }
+
+// запуск
+    initCountdownTimer('.info__match-next-time');
+
+
+    function setProgress(el, percent) {
+        const fill = el.querySelector('.progress-fill');
+        const label = el.querySelector('.progress-label');
+        fill.style.height = percent + "%";
+        label.textContent = `${percent}/100`;
+    }
+
+// приклад використання:
+    const bar = document.querySelector('.progress-bar');
+    setProgress(bar, 75);
+
+
+
 })();

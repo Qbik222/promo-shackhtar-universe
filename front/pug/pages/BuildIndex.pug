@@ -2,84 +2,173 @@
 .fav-page.loading
     .spinner-overlay
         .spinner
-    .table
-        .table__tabs
-            .table__tabs-item.active(data-week="1") #[span(data-translate="tableTab") Faza] 1
-            .table__tabs-item(data-week="2") #[span(data-translate="tableTab") Faza] 2
-        .table__head
-            .table__row
-                .table__row-item(data-translate="tablePlace") [ MJESTO ]
-                .table__row-item(data-translate="tableId") [ ID ]
-                .table__row-item(data-translate="tablePoints") [ BODOVI ]
-                .table__row-item(data-translate="tablePrize") [ NAGRADA ]
-        .table__body#table
-            .table__row.place1.you
-                .table__row-item 01 #[span.you(data-translate="you") ti]
-                .table__row-item 4538***
-                .table__row-item 32.9
-                .table__row-item 350 € #[span.table-coin]
-            .table__row.palce2
-                .table__row-item 02
-                .table__row-item 4538***
-                .table__row-item 32.9
-                .table__row-item 350 € #[span.table-coin]
-            .table__row.palce3
-                .table__row-item 03
-                .table__row-item 4538***
-                .table__row-item 32.9
-                .table__row-item 350 € #[span.table-coin]
-            .table__row
-                .table__row-item 04
-                .table__row-item 4538***
-                .table__row-item 32.9
-                .table__row-item 350 € #[span.table-coin]
-            .table__row
-                .table__row-item 05
-                .table__row-item 4538***
-                .table__row-item 32.9
-                .table__row-item 350 € #[span.table-coin]
-            .table__row
-                .table__row-item 06
-                .table__row-item 4538***
-                .table__row-item 32.9
-                .table__row-item 350 € #[span.table-coin]
-            .table__row
-                .table__row-item 07
-                .table__row-item 4538***
-                .table__row-item 32.9
-                .table__row-item 350 € #[span.table-coin]
-            .table__row
-                .table__row-item 08
-                .table__row-item 4538***
-                .table__row-item 32.9
-                .table__row-item 350 € #[span.table-coin]
-            .table__row
-                .table__row-item 09
-                .table__row-item 4538***
-                .table__row-item 32.9
-                .table__row-item 350 € #[span.table-coin]
-            .table__row
-                .table__row-item 10
-                .table__row-item 4538***
-                .table__row-item 32.9
-                .table__row-item 350 € #[span.table-coin]
-        .table__body#tableOther
-            .table__row
-                .table__row-item 38
-                .table__row-item 4538***
-                .table__row-item 32.9
-                .table__row-item 350 € #[span.table-coin]
-            .table__row.you
-                .table__row-item 39 #[span.you(data-translate="you") ti]
-                .table__row-item 4538***
-                .table__row-item 32.9
-                .table__row-item 350 € #[span.table-coin]
-            .table__row
-                .table__row-item 40
-                .table__row-item 4538***
-                .table__row-item 32.9
-                .table__row-item 350 € #[span.table-coin]
+    .welcome
+       .welcome__left
+           .welcome__title
+               .welcome__title-top(data-translate="welcomeTitleTop")
+                   span.welcome__title-top-item ша
+                   span.welcome__title-top-item
+                   span.welcome__title-top-item тар
+                   span.welcome__title-top-item :
+               .welcome__title-center(data-translate="welcomeTitleCenter") новий
+               .welcome__title-bottom(data-translate="welcomeTitleBottom") всесвіт гри
 
+
+
+           a.welcome__btn.btn.unauth-msg(data-translate="authBtn" href="/login" data-promo="shackhtar_universe_ua_20102025" data-button="auth_top") авторизуватись
+           button.welcome__btn.btn.part-btn.hide(data-translate="joinBtn" data-promo="shackhtar_universe_ua_20102025" data-button="takePart_top") взяти участь
+           a.welcome__btn.btn.btn-join.hide(data-translate="playBtn" href="#" data-promo="shackhtar_universe_ua_20102025" data-button="playBtn_top") до подій
+       .welcome__right
+           picture.welcome__right-pers
+               source(media="(max-width: 600px)" srcset='img/welcome/pers-mob.png')
+               source(media="(max-width: 950px) and (max-width: 600px) and (orientation: landscape)" srcset='img/welcome/pers-mob.png')
+               source(media="(max-width: 1050px)" srcset='img/welcome/pers-tab.png')
+               img(src="img/welcome/pers.png" alt="Favbet")
+           .welcome__right-decor
+               .welcome__right-star
+                   img(src="img/welcome/star.png" alt="Favbet")
+               .welcome__right-icon
+                   img(src="img/welcome/icon.png" alt="Favbet")
+               .welcome__right-hammer
+                   img(src="img/welcome/hammer.png" alt="Favbet")
+               .welcome__right-cup
+                   img(src="img/welcome/cup.png" alt="Favbet")
+    .info
+        .info__left(data-translate="infoText") З ХХ.ХХ.2025 до ХХ.ХХ.2026 роби більше виграшних ставок на ігри команди "Шахтар" та отримай фірмові подарунки
+        .info__right
+            .info__match(data-match="1")
+                .info__match-left
+                    .info__match-logo
+                        img(src="img/info/match-logo.png" alt="Favbet")
+                    a.info__match-btn.btn(href="#" data-translate="toMatchLink") до матчу
+                .info__match-right
+                    .info__match-teams
+                        .info__match-team1 Shakhtar
+                        .info__match-separator
+                        .info__match-team2 Rukh
+                    .info__match-date
+                        .info__match-date-text(data-translate="infoMatchText") Прем’єр-ліга України
+                        .info__match-date-time 28 вересня 2025 р. 18:00
+                    .info__match-next
+                        .info__match-next-text(data-translate="infoMatchNext") До наступного матчу Шахтаря
+                        .info__match-next-time
+    .drop
+        details.dropdown
+            summary(data-translate="rulseBtn")
+            .drop-txt
+                .drop-txt-list(data-translate="rules")
+    .prize
+        .prize__top
+            .prize__title(data-translate="prizeTitle") Призи
+            .prize__desc
+                .prize__console
+                    img(src="img/prize/PS5.png" alt="Favbet")
+                .prize__podium
+                    img(src="img/prize/podium.png" alt="Favbet")
+                .prize__decor
+                    .prize__decor-item
+                        img(src="img/prize/plus.png" alt="Favbet")
+                    .prize__decor-item
+                        img(src="img/prize/coin.png" alt="Favbet")
+                    .prize__decor-item
+                        img(src="img/prize/rectangle.png" alt="Favbet")
+                    .prize__decor-item
+                        img(src="img/prize/triangle.png" alt="Favbet")
+                    .prize__decor-item
+                        img(src="img/prize/gamepad.png" alt="Favbet")
+                .prize__amount(data-amount-points="100")
+                    .prize__amount-points 100
+                    .prize__amount-lock
+                        img(src="img/prize/lock-icon.png" alt="Favbet")
+                    .prize__amount-text(data-translate="playstation") PS5
+                    .prize__amount-info
+                        img(src="img/info-icon.png" alt="Favbet")
+
+            //.prize__mob
+        .prize__bottom
+            .prize__left
+                .prize__item(data-amount-points="10")
+                    .prize__item-left
+                        .prize__item-points 10
+                        .prize__item(data-translate="prize10Points") Брендована колонка
+                        button.prize__item-btn(data-translate="chooseBtn") обрати
+                    .prize__item-right
+                        img(src="img/prize/prize10points.png" alt="Favbet")
+                    .prize__item-info
+                        img(src="img/info-icon.png" alt="Favbet")
+
+                .prize__item(data-amount-points="40")
+                    .prize__item-left
+                        .prize__item-points 40
+                        .prize__item(data-translate="prize40Points") Футбольний мʼяч
+                        button.prize__item-btn(data-translate="chooseBtn") обрати
+                    .prize__item-right
+                        img(src="img/prize/prize40points.png" alt="Favbet")
+                    .prize__item-info
+                        img(src="img/info-icon.png" alt="Favbet")
+
+                .prize__item(data-amount-points="50")
+                    .prize__item-left
+                        .prize__item-points 50
+                        .prize__item(data-translate="prize50Points") Футбольний мʼяч
+                        button.prize__item-btn(data-translate="chooseBtn") обрати
+                    .prize__item-right
+                        img(src="img/prize/prize50points.png" alt="Favbet")
+                    .prize__item-info
+                        img(src="img/info-icon.png" alt="Favbet")
+
+            .prize__bar
+                .progress-bar
+                    .progress-fill(style="height: 50%")
+                    .progress-label 50/100
+            .prize__right
+                .prize__item(data-amount-points="4")
+                    .prize__item-left
+                        .prize__item-points 4
+                        .prize__item(data-translate="prize4Points") Шарф вболівальника
+                        button.prize__item-btn(data-translate="chooseBtn") обрати
+                    .prize__item-right
+                        img(src="img/prize/prize4points.png" alt="Favbet")
+                    .prize__item-info
+                        img(src="img/info-icon.png" alt="Favbet")
+
+                .prize__item(data-amount-points="25")
+                    .prize__item-left
+                        .prize__item-points 25
+                        .prize__item(data-translate="prize25Points") Брендована колонка
+                        button.prize__item-btn(data-translate="chooseBtn") обрати
+                    .prize__item-right
+                        img(src="img/prize/prize25points.png" alt="Favbet")
+                    .prize__item-info
+                        img(src="img/info-icon.png" alt="Favbet")
+
+                .prize__item(data-amount-points="45")
+                    .prize__item-left
+                        .prize__item-points 45
+                        .prize__item(data-translate="prize45Points") Ігрова футболка
+                        button.prize__item-btn(data-translate="chooseBtn") обрати
+                    .prize__item-right
+                        img(src="img/prize/prize45points.png" alt="Favbet")
+                    .prize__item-info
+                        img(src="img/info-icon.png" alt="Favbet")
+
+                .prize__item(data-amount-points="80")
+                    .prize__item-left
+                        .prize__item-points 80
+                        .prize__item(data-translate="prize80Points") Набір трушного вболівальника
+                        button.prize__item-btn(data-translate="chooseBtn") обрати
+                    .prize__item-right
+                        img(src="img/prize/prize80points.png" alt="Favbet")
+                    .prize__item-info
+                        img(src="img/info-icon.png" alt="Favbet")
+
+        .prize__last
+            .prize__last-text(data-translate="lastUpd") Останнє оновлення
+            .prize__last-upd XX:XX
+        a.prize__btn.btn.unauth-msg(data-translate="authBtn" href="/login" data-promo="shackhtar_universe_ua_20102025" data-button="auth_top") авторизуватись
+        button.prize__btn.btn.part-btn.hide(data-translate="joinBtn" data-promo="shackhtar_universe_ua_20102025" data-button="takePart_top") взяти участь
+        a.prize__btn.btn.btn-join.hide(data-translate="playBtn" href="#" data-promo="shackhtar_universe_ua_20102025" data-button="playBtn_top") до подій
+        .prize__text(data-translate="prizeText") *Загальний призовий фонд акції «Шахтар: НОВИЙ ВСЕСВІТ ГРИ», вид та розмір бонусної пропозиції визначається та пропонується учасникам виключно на розсуд Організатора та в межах чинної Програми лояльності. Період дії акції – з ХХ.ХХ.2025 до ХХ.ХХ.2026 року. Деталі на favbet.ua
     .drop
         details.dropdown
             summary(data-translate="rulseBtn")
