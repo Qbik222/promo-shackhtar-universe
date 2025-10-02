@@ -22,13 +22,13 @@
            picture.welcome__right-pers
                source(media="(max-width: 600px)" srcset='img/welcome/pers-mob.png')
                source(media="(max-width: 950px) and (max-width: 600px) and (orientation: landscape)" srcset='img/welcome/pers-mob.png')
-               source(media="(max-width: 1050px)" srcset='img/welcome/pers-tab.png')
+               source(media="(max-width: 1050px)" srcset='img/welcome/pers.png')
                img(src="img/welcome/pers.png" alt="Favbet")
            .welcome__right-decor
                .welcome__right-star
                    img(src="img/welcome/star.png" alt="Favbet")
-               .welcome__right-icon
-                   img(src="img/welcome/icon.png" alt="Favbet")
+               .welcome__right-crown
+                   img(src="img/welcome/crown.png" alt="Favbet")
                .welcome__right-hammer
                    img(src="img/welcome/hammer.png" alt="Favbet")
                .welcome__right-cup
@@ -39,7 +39,7 @@
             .info__match(data-match="1")
                 .info__match-left
                     .info__match-logo
-                        img(src="img/info/match-logo.png" alt="Favbet")
+                        img(src="img/info/logo.png" alt="Favbet")
                     a.info__match-btn.btn(href="#" data-translate="toMatchLink") до матчу
                 .info__match-right
                     .info__match-teams
@@ -62,7 +62,7 @@
             .prize__title(data-translate="prizeTitle") Призи
             .prize__desc
                 .prize__console
-                    img(src="img/prize/PS5.png" alt="Favbet")
+                    img(src="img/prize/points/100PointsPrize.png" alt="Favbet")
                 .prize__podium
                     img(src="img/prize/podium.png" alt="Favbet")
                 .prize__decor
@@ -74,6 +74,8 @@
                         img(src="img/prize/rectangle.png" alt="Favbet")
                     .prize__decor-item
                         img(src="img/prize/triangle.png" alt="Favbet")
+                    .prize__decor-item
+                        img(src="img/prize/circle.png" alt="Favbet")
                     .prize__decor-item
                         img(src="img/prize/gamepad.png" alt="Favbet")
                 .prize__amount(data-amount-points="100")
@@ -90,30 +92,30 @@
                 .prize__item(data-amount-points="10")
                     .prize__item-left
                         .prize__item-points 10
-                        .prize__item(data-translate="prize10Points") Брендована колонка
+                        .prize__item(data-translate="10PointsPrize") Брендована колонка
                         button.prize__item-btn(data-translate="chooseBtn") обрати
                     .prize__item-right
-                        img(src="img/prize/prize10points.png" alt="Favbet")
+                        img(src="img/prize/points/prize10points.png" alt="Favbet")
                     .prize__item-info
                         img(src="img/info-icon.png" alt="Favbet")
 
                 .prize__item(data-amount-points="40")
                     .prize__item-left
                         .prize__item-points 40
-                        .prize__item(data-translate="prize40Points") Футбольний мʼяч
+                        .prize__item(data-translate="40PointsPrize") Футбольний мʼяч
                         button.prize__item-btn(data-translate="chooseBtn") обрати
                     .prize__item-right
-                        img(src="img/prize/prize40points.png" alt="Favbet")
+                        img(src="img/prize/points/prize40points.png" alt="Favbet")
                     .prize__item-info
                         img(src="img/info-icon.png" alt="Favbet")
 
                 .prize__item(data-amount-points="50")
                     .prize__item-left
                         .prize__item-points 50
-                        .prize__item(data-translate="prize50Points") Футбольний мʼяч
+                        .prize__item(data-translate="50PointsPrize") Футбольний мʼяч
                         button.prize__item-btn(data-translate="chooseBtn") обрати
                     .prize__item-right
-                        img(src="img/prize/prize50points.png" alt="Favbet")
+                        img(src="img/prize/points/prize50points.png" alt="Favbet")
                     .prize__item-info
                         img(src="img/info-icon.png" alt="Favbet")
 
@@ -125,40 +127,39 @@
                 .prize__item(data-amount-points="4")
                     .prize__item-left
                         .prize__item-points 4
-                        .prize__item(data-translate="prize4Points") Шарф вболівальника
+                        .prize__item(data-translate="4PointsPrize") Шарф вболівальника
                         button.prize__item-btn(data-translate="chooseBtn") обрати
                     .prize__item-right
-                        img(src="img/prize/prize4points.png" alt="Favbet")
+                        img(src="img/prize/points/4PointsPrize.png" alt="Favbet")
                     .prize__item-info
                         img(src="img/info-icon.png" alt="Favbet")
 
                 .prize__item(data-amount-points="25")
                     .prize__item-left
                         .prize__item-points 25
-                        .prize__item(data-translate="prize25Points") Брендована колонка
+                        .prize__item(data-translate="25PointsPrize") Брендована колонка
                         button.prize__item-btn(data-translate="chooseBtn") обрати
                     .prize__item-right
-                        img(src="img/prize/prize25points.png" alt="Favbet")
+                        img(src="img/prize/points/prize25points.png" alt="Favbet")
                     .prize__item-info
                         img(src="img/info-icon.png" alt="Favbet")
-
                 .prize__item(data-amount-points="45")
                     .prize__item-left
                         .prize__item-points 45
-                        .prize__item(data-translate="prize45Points") Ігрова футболка
+                        .prize__item(data-translate="45PointsPrize") Ігрова футболка
                         button.prize__item-btn(data-translate="chooseBtn") обрати
                     .prize__item-right
-                        img(src="img/prize/prize45points.png" alt="Favbet")
+                        img(src="img/prize/points/prize45points.png" alt="Favbet")
                     .prize__item-info
                         img(src="img/info-icon.png" alt="Favbet")
 
                 .prize__item(data-amount-points="80")
                     .prize__item-left
                         .prize__item-points 80
-                        .prize__item(data-translate="prize80Points") Набір трушного вболівальника
+                        .prize__item(data-translate="80PointsPrize") Набір трушного вболівальника
                         button.prize__item-btn(data-translate="chooseBtn") обрати
                     .prize__item-right
-                        img(src="img/prize/prize80points.png" alt="Favbet")
+                        img(src="img/prize/points/prize80points.png" alt="Favbet")
                     .prize__item-info
                         img(src="img/info-icon.png" alt="Favbet")
 

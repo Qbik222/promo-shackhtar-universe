@@ -2,24 +2,209 @@
   display: none !important
 
 body.light
-  background: $blue
+  background: $black
 
 body
   overscroll-behavior: none
   -webkit-tap-highlight-color: transparent
-  background: $blue
+  background: $black
   img
     max-width: 100%
     height: auto
   & > *
     font-family: inherit
 
+.btn
+  display: inline-flex
+  align-items: center
+  justify-content: center
+  //height: 50px
+  //padding: 12px 20px
+  background: $green
+  border-radius: 6px
+  color: $blue
+  font-size: 18px
+  font-family: $font-roboto-condensed-bold
+  text-transform: uppercase
+  transition: all .4s ease-in-out
+  &:hover
+    cursor: pointer
+    background: $green-hover
+
+
 .fav-page
-  background: $blue
+  background: $black
   display: flex
   flex-direction: column
   align-items: center
   overflow: hidden
+
+.welcome
+  display: flex
+  align-items: center
+  justify-content: center
+  max-width: 1280px
+  min-width: 1280px
+  position: relative
+  background: url("../img/welcome/bg-desc.jpg") no-repeat 50% 0/cover
+  &::before
+    content: ""
+    z-index: 0
+    pointer-events: none
+    position: absolute
+    bottom: 0
+    left: -2px
+    height: 100%
+    width: 25%
+    background: linear-gradient(90deg, #090A18 5%, rgba(9, 10, 24, 0) 100%)
+  &::after
+    content: ""
+    z-index: 0
+    pointer-events: none
+    position: absolute
+    bottom: 0
+    right: -2px
+    height: 100%
+    width: 25%
+    background: linear-gradient(270deg, #090A18 5%, rgba(9, 10, 24, 0) 100%)
+  &__btn
+    margin-top: 20px
+    z-index: 1
+    padding: 14px 20px
+  &__left
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    z-index: 1
+    &::before
+      content: ""
+      z-index: 0
+      pointer-events: none
+      position: absolute
+      bottom: -1px
+      left: 0
+      height: 20%
+      width: 100%
+      background: linear-gradient(0deg, #090A18 5%, rgba(9, 10, 24, 0) 100%)
+  &__right
+    width: 560px
+    height: 340px
+    position: relative
+    display: flex
+    align-items: flex-end
+    justify-content: center
+    margin-left: 25px
+    z-index: 0
+    &-pers
+      position: relative
+      z-index: 2
+      max-width: 415px
+      margin: 0 0 -1px 40px
+    &-decor
+      width: 100%
+      height: 100%
+      position: absolute
+      left: 0
+      top: 0
+      z-index: 1
+      & > *
+        position: absolute
+    &-crown
+      max-width: 99px
+      top: 0
+      left: 0
+    &-star
+      max-width: 64px
+      left: 44px
+      bottom: 11px
+    &-hammer
+      max-width: 106px
+      top: -20px
+      left: 220px
+    &-cup
+      max-width: 154px
+      top: -20px
+      right: 0
+
+  &__title
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    text-transform: uppercase
+    &-top
+      display: flex
+      align-items: center
+      justify-content: center
+      &-item
+        color: $white
+        font-size: 58px
+        font-family: $font-favbet-normal-bold
+        &:nth-child(2)
+          display: block
+          width: 1em
+          height: .88em
+          background: url("../img/welcome/separator.png") no-repeat 0 0 / contain
+        &:nth-child(4)
+          font-size: 30px
+          margin-left: 5px
+    &-center
+      color: $white
+      font-family: $font-favbet-wide-bold
+      font-size: 69px
+    &-bottom
+      color: $white
+      font-family: $font-favbet-condensed-bold
+      font-size: 58px
+
+.info
+  display: flex
+  align-items: center
+  justify-content: space-between
+  max-width: 768px
+  width: 95%
+  &__left
+    width: 360px
+    color: $white
+    font-family: $font-roboto-condensed-regular
+    font-size: 18px
+  &__right
+    width: 385px
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+  &__match
+    width: 385px
+    height: 172px
+    background: linear-gradient(180deg, rgba(37, 3, 35, 0.60) 0%, rgba(21, 12, 127, 0.60) 100%)
+    border-radius: 18px
+    display: flex
+    align-items: center
+    justify-content: flex-start
+    padding: 16px
+    position: relative
+    &::before
+      content: ""
+      width: 140px
+      height: 100px
+      position: absolute
+      left: 0
+      z-index: 0
+      top: 0
+      background: url("../img/info/logo-light.png")  no-repeat 0 0 / contain
+    &-btn
+      padding: 8px 16px
+      font-size: 14px
+    &-left
+      display: flex
+      flex-direction: column
+      align-items: center
+      justify-content: center
+    &-logo
+      max-width: 58px
+      z-index: 1
 
 
 
@@ -168,13 +353,13 @@ body
 .retreat1
   padding-left: 20px
   strong
-    font-family: $font-suisse-intl-bold
+    font-family: $font-roboto-condensed-regular
     color: $white
 
 .retreat2
   padding-left: 40px
   strong
-    font-family: $font-suisse-intl-bold
+    font-family: $font-roboto-condensed-bold
     color: $white
 
 .circle
