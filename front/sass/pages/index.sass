@@ -27,6 +27,7 @@ body
   font-family: $font-roboto-condensed-bold
   text-transform: uppercase
   transition: all .4s ease-in-out
+  border: none
   &:hover
     cursor: pointer
     background: $green-hover
@@ -47,6 +48,8 @@ body
   min-width: 1280px
   position: relative
   background: url("../img/welcome/bg-desc.jpg") no-repeat 50% 0/cover
+  @media screen and (max-width: 950px)
+    background: url("../img/welcome/bg-tab.jpg") no-repeat 50% 0/cover
   &::before
     content: ""
     z-index: 0
@@ -88,7 +91,8 @@ body
       width: 100%
       background: linear-gradient(0deg, #090A18 5%, rgba(9, 10, 24, 0) 100%)
   &__right
-    width: 560px
+    max-width: 560px
+    min-width: 560px
     height: 340px
     position: relative
     display: flex
@@ -164,6 +168,7 @@ body
   justify-content: space-between
   max-width: 768px
   width: 95%
+  padding: 30px 0
   &__left
     width: 360px
     color: $white
@@ -194,6 +199,9 @@ body
       z-index: 0
       top: 0
       background: url("../img/info/logo-light.png")  no-repeat 0 0 / contain
+    &-right
+      width: 235px
+      margin-left: 23px
     &-btn
       padding: 8px 16px
       font-size: 14px
@@ -205,9 +213,323 @@ body
     &-logo
       max-width: 58px
       z-index: 1
+    &-teams
+      display: flex
+      align-items: center
+      justify-content: flex-start
+      padding-bottom: 8px
+      border-bottom: 1px solid #1C224A
+    &-team1, &-team2
+      color: $white
+      font-size: 16px
+      font-family: $font-roboto-condensed-regular
+    &-separator
+      width: 31px
+      height: 23px
+      background: url("../img/info/vs.png") no-repeat 0 0 / contain
+      margin: 0 auto
+    &-date
+      display: flex
+      align-items: center
+      justify-content: space-between
+      opacity: .4
+      padding: 10px 0
+      margin-bottom: 10px
+      &-text, &-time
+        font-size: 10px
+        font-family: $font-roboto-condensed-regular
+        color: $white
+    &-next
+      display: flex
+      flex-direction: column
+      align-items: flex-start
+      justify-content: center
+      &-text
+        color: $white
+        font-size: 14px
+        font-family: $font-roboto-condensed-regular
+        align-self: flex-start
+      &-time
+        display: flex
+        flex-direction: column
+        align-items: flex-start
 
 
+.timer
+  display: flex
+  align-items: center
+  justify-content: center
+  font-family: $font-roboto-condensed-bold
+  font-size: 24px
+  color: rgba($white, .5)
+  margin: 6px 0 4px
+  & > *
+    font-family: inherit
+  .days, .hours, .minutes
+    color: #E96A23
+    margin: 0 4px
+  .days
+    margin-left: 0
+.progress
+  margin-top: 5px
+  width: 235px
+  height: 4px
+  background: rgba($white, 0.1)
+  border-radius: 6px
+  position: relative
+  &__bar
+    height: 100%
+    max-width: 100%
+    background: #E96A23
+    position: absolute
+    left: 0
+    top: 0
+    border-radius: inherit
 
+
+.prize
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  width: 735px
+  padding-top: 30px
+  &__top
+    width: 100%
+  &__title
+    color: $white
+    text-transform: uppercase
+    font-family: $font-favbet-normal-bold
+    font-size: 36px
+    text-align: center
+    display: flex
+    align-items: center
+    justify-content: center
+    gap: 15px
+    &::before, &::after
+      content: ""
+      display: block
+      width: 70px
+      height: 1px
+    &::before
+      background: linear-gradient(270deg, #FFF 0%, rgba(255, 255, 255, 0.00) 100%)
+    &::after
+      background: linear-gradient(90deg, #FFF 0%, rgba(255, 255, 255, 0.00) 100%)
+  &__desc
+    height: 355px
+    position: relative
+    width: 100%
+  &__podium
+    position: absolute
+    left: 0
+    bottom: 0
+    width: 100%
+    z-index: 0
+  &__console
+    max-width: 170px
+    position: absolute
+    left: 50%
+    bottom: 130px
+    transform: translate(-50%, 0)
+    z-index: 1
+  &__decor
+    position: absolute
+    width: 100%
+    height: 100%
+    left: 0
+    top: 0
+    &-item
+      position: absolute
+      &:nth-child(1)
+        max-width: 104px
+        left: 56px
+        bottom: -17px
+        z-index: 2
+      &:nth-child(2)
+        max-width: 48px
+        left: 113px
+        bottom: 62px
+        z-index: 1
+      &:nth-child(3)
+        max-width: 53px
+        left: 189px
+        top: 113px
+      &:nth-child(4)
+        max-width: 130px
+        right: 100px
+        top: 8px
+        z-index: 2
+      &:nth-child(5)
+        max-width: 49px
+        top: 87px
+        right: 127px
+        z-index: 1
+      &:nth-child(6)
+        max-width: 41px
+        bottom: 90px
+        right: 225px
+  &__amount
+    width: 180px
+    height: 46px
+    background: url("../img/prize/100PointsBgDesc.png") no-repeat 0 0 / cover
+    background-size: 100% 100%
+    display: flex
+    align-items: center
+    justify-content: center
+    position: absolute
+    left: 50%
+    transform: translateX(-50%)
+    bottom: 20px
+    &-lock
+      max-width: 29px
+      margin: 0 6px
+    &-points
+      background: #1C60FB
+      border-radius: 4px
+      padding: 4px 8px
+      text-transform: uppercase
+      font-family: $font-roboto-condensed-bold
+      font-size: 10px
+      color: $white
+    &-text
+      color: $white
+      font-family: $font-roboto-condensed-regular
+      font-size: 14px
+    &-info
+      width: 13px
+      height: 17px
+      margin-left: 6px
+  &__bottom
+    position: relative
+    width: 665px
+    padding-top: 70px
+    .prize__mob
+      display: none
+  &__bar
+    position: absolute
+    left: 50%
+    transform: translateX(-50%)
+    bottom: 0
+  &__items
+    display: flex
+    flex-direction: column-reverse
+  &__item
+    width: 260px
+    height: 132px
+    padding: 8px 16px
+    display: flex
+    align-items: center
+    justify-content: space-between
+    gap: 8px
+    border-radius: 18px
+    background: linear-gradient(180deg, rgba(37, 3, 35, 0.60) 0%, rgba(21, 12, 127, 0.60) 100%)
+    position: relative
+    &:nth-child(even)
+      align-self: flex-start
+    &:nth-child(odd)
+      align-self: flex-end
+    &:not(:last-child)
+      margin-top: -30px
+    &::before
+      content: ""
+      display: block
+      width: 125px
+      height: 125px
+      background: url("../img/prize/card-light.png") no-repeat 0 0 / contain
+      position: absolute
+      z-index: 0
+      right: 0
+      top: 4px
+    &-info
+      width: 14px
+      height: 14px
+      position: absolute
+      top: 16px
+      right: 16px
+      z-index: 2
+    &-right
+      min-width: 85px
+      max-width: 85px
+      height: 85px
+      opacity: .5
+      position: relative
+      z-index: 2
+    &-left
+      display: flex
+      flex-direction: column
+    &-points
+      background: #1C60FB
+      border-radius: 4px
+      padding: 4px 8px
+      text-transform: uppercase
+      font-family: $font-roboto-condensed-bold
+      font-size: 10px
+      display: inline-block
+      width: fit-content
+      color: $white
+    &-text
+      color: rgba($white, .5)
+      font-family: $font-roboto-condensed-regular
+      font-size: 14px
+      margin: 15px 0
+      display: flex
+      align-items: center
+      &::before
+        content: ""
+        display: block
+        min-width: 29px
+        height: 29px
+        background: url("../img/prize/lock-icon.png") no-repeat 0 0 / cover
+        margin-right: 5px
+    &-btn
+      display: none
+      padding: 8px 25px
+      background: $white
+      font-size: 14px
+      font-family: $font-roboto-condensed-bold
+      text-transform: uppercase
+      color: $blue
+      border: none
+      border-radius: 6px
+      width: fit-content
+    &._active
+      box-shadow: 0 0 20px 0 rgba(255, 38, 126, 0.40) inset
+      border: 1px solid #01147F
+      background: linear-gradient(180deg, #250323 0%, #150C7F 100%)
+      .prize
+        &__item
+          &-btn
+            display: block
+          &-text
+            color: $white
+            &::before
+              content: none
+          &-right
+            opacity: 1
+  &__last
+    display: flex
+    align-items: center
+    justify-content: center
+    margin-top: 20px
+    font-size: 10px
+    font-family: $font-roboto-condensed-regular
+    & > *
+      font-family: inherit
+      color: $white
+    &-upd
+      margin-left: 4px
+  &__btn
+    padding: 15px 49px
+    margin-top: 10px
+  &__text
+    text-align: center
+    font-size: 12px
+    opacity: .5
+    font-family: $font-roboto-condensed-regular
+    color: $white
+    margin: 35px 0
+    max-width: 768px
+    width: 95vw
 // loader
 
 .spinner-overlay
@@ -234,18 +556,31 @@ body
 
 .progress-bar
   position: relative
-  width: 30px
-  height: 200px
-  background: #0d1333
-  border-radius: 20px
+  width: 108px
+  height: 799px
+  background: url("../img/prize/progress/progress-empty-desc.png") no-repeat 50% 0 / cover
+  background-size: 108px 799px
   overflow: hidden
+  @media screen and (max-width: 600px)
+    width: 52px
+    height: 1102px
+    background: url("../img/prize/progress/progress-empty-mob.png") no-repeat 50% 100% / cover
+    background-size: 52px 1102px
+
 
 .progress-fill
   position: absolute
   bottom: 0
+  left: 0
   width: 100%
-  background: linear-gradient(to top, #ff4b2b, #ff416c, #00ffcc)
+  background: url("../img/prize/progress/progress-full-desc.png") no-repeat 50% 100% / cover
+  background-size: 108px 799px
   transition: height 0.5s ease
+  @media screen and (max-width: 600px)
+    width: 52px
+    height: 1082px
+    background: url("../img/prize/progress/progress-full-mob.png") no-repeat 50% 100% / cover
+    background-size: 52px 1102px
 
 .progress-label
   position: absolute
@@ -260,11 +595,82 @@ body
   font-weight: bold
 
 
+.popups
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  z-index: 10
+  opacity: 1
+  display: flex
+  align-items: center
+  justify-content: center
+  background: rgba(#090B18, .6)
+  backdrop-filter: blur(3px)
+  &._opacity
+    opacity: 0
+    pointer-events: none
+.popup
+  display: flex
+  flex-direction: column
+  align-items: center
+  background: $white
+  border-radius: 6px
+  width: 375px
+  height: 420px
+  padding: 48px 16px 24px 16px
+  position: relative
+  &__close
+    position: absolute
+    right: 16px
+    top: 16px
+    width: 24px
+    height: 24px
+    cursor: pointer
+    background: url("../img/popup/close.png") no-repeat 0 0 / contain
+  &__title, &__subtitle
+    color: $blue
+    font-size: 16px
+    font-family: $font-roboto-condensed-bold
+    text-align: center
+  &__subtitle
+    margin-bottom: 4px
+  &__title
+    text-transform: uppercase
+    margin-bottom: 16px
+  &__img
+    max-width: 128px
+    margin-bottom: 16px
+  &__text
+    font-family: $font-roboto-condensed-regular
+    font-size: 12px
+    color: $blue
+    margin-bottom: 40px
+  &__btn
+    margin-bottom: 8px
+    padding: 12px 16px
+    width: 100%
+    font-size: 14px
+    &.btn-cancel
+      border: none
+      background: transparent
+      font-family: $font-roboto-condensed-bold
+      color: $blue
+      font-size: 14px
+      text-transform: uppercase
+      transition: all .4s ease-in-out
+      border-radius: 6px
+      padding: 12px 16px
+      &:hover
+        cursor: pointer
+        background: $blue
+        color: $white
 
 
 .drop
-  max-width: 605px
-  width: 100%
+  max-width: 768px
+  width: 95%
   margin: 0 auto
   border-radius: 10px
   position: relative
@@ -280,24 +686,25 @@ body
     transform:  rotate(180deg)
   summary
     list-style: none
-    padding: 8px 15px
-    //font-family: $font-suisse-intl-reg
-    font-size: 14px
+    padding: 8px 0 12px 0
+    font-family: $font-roboto-condensed-bold
+    font-size: 18px
     cursor: pointer
     background-size: 100% 100%
     display: flex
     align-items: center
     justify-content: space-between
     color: $white
+    border-bottom: 1px solid #9299AF
     @media screen and (max-width: 600px)
       font-size: 14px
       line-height: 22px
     &::before
       content: ""
       display: block
-      min-width: 20px
+      min-width: 12px
       height: 12px
-      //background: url("../img/arrow-drop.png") no-repeat 0 0/contain
+      background: url("../img/arrow-down.png") no-repeat 0 0/contain
       order: 2
 
   &-txt
@@ -305,7 +712,7 @@ body
     margin-top: 10px
     max-height: 350px
     overflow-y: auto
-    border: 1px solid $white
+    //border: 1px solid $white
     scrollbar-width: auto
     &::-webkit-scrollbar-thumb
       background: $green
@@ -324,7 +731,7 @@ body
         tr, td
           border-color: $white
           color: $white
-          //font-family: $font-suisse-intl-reg
+          font-family: $font-roboto-condensed-regular
 
         td
           border: none
@@ -335,13 +742,13 @@ body
       p, strong, a
         font-size: 14px
         line-height: 22px
-        //font-family: $font-suisse-intl-reg
+        font-family: $font-roboto-condensed-regular
         color: $white
       span
-        //font-family: $font-suisse-intl-reg
+        font-family: $font-roboto-condensed-regular
         display: block
       tr,td
-        //font-family: $font-suisse-intl-reg
+        font-family: $font-roboto-condensed-regular
       td
         padding-left: 5px
 

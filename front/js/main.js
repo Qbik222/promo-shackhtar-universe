@@ -464,72 +464,61 @@
     //     .then(init) // запуск ініту сторінки
 
 
-    function initCountdownTimer(selector) {
-        const parent = document.querySelector(selector);
-        if (!parent) return;
+    function initCountdown(selector, startTime, endTime) {
+        const container = document.querySelector(selector)
+        if (!container) return
 
-        const targetAttr = parent.getAttribute('data-target') || '';
-        const targetTime = isNaN(Date.parse(targetAttr))
-            ? (parseInt(targetAttr) || 0)
-            : Date.parse(targetAttr);
-        if (!targetTime) return;
-
-        parent.innerHTML = `
-    <div class="countdown">
-      <span class="unit"><span class="value">00</span><span class="label">Д</span></span>
-      <span class="sep">:</span>
-      <span class="unit"><span class="value">00</span><span class="label">Г</span></span>
-      <span class="sep">:</span>
-      <span class="unit"><span class="value">00</span><span class="label">Х</span></span>
+        container.innerHTML = `
+    <div class="timer">
+      <span class="days">00</span>Д :
+      <span class="hours">00</span>Г :
+      <span class="minutes">00</span>Х
     </div>
-    <div class="progress"><div class="progress__bar"></div></div>
-  `;
+    <div class="progress">
+      <div class="progress__bar"></div>
+    </div>
+  `
 
-        const values = parent.querySelectorAll('.value');
-        const progressBar = parent.querySelector('.progress__bar');
+        const daysEl = container.querySelector('.days')
+        const hoursEl = container.querySelector('.hours')
+        const minutesEl = container.querySelector('.minutes')
+        const progressBar = container.querySelector('.progress__bar')
 
-        let initialDiff = null;
-        let timerId = null;
+        const total = new Date(endTime).getTime() - new Date(startTime).getTime()
 
-        function formatNumber(n) {
-            return String(n).padStart(2, '0');
-        }
+        function update() {
+            const now = Date.now()
+            const diff = new Date(endTime).getTime() - now
 
-        function updateTimer() {
-            const now = Date.now();
-            let diff = Math.max(0, targetTime - now);
-
-            if (initialDiff === null) {
-                initialDiff = diff || 1;
+            if (diff <= 0) {
+                daysEl.textContent = '00'
+                hoursEl.textContent = '00'
+                minutesEl.textContent = '00'
+                progressBar.style.width = '100%'
+                clearInterval(interval)
+                return
             }
 
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            diff -= days * 24 * 60 * 60 * 1000;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24)
+            const minutes = Math.floor((diff / (1000 * 60)) % 60)
 
-            const hours = Math.floor(diff / (1000 * 60 * 60));
-            diff -= hours * 60 * 60 * 1000;
+            daysEl.textContent = String(days).padStart(2, '0')
+            hoursEl.textContent = String(hours).padStart(2, '0')
+            minutesEl.textContent = String(minutes).padStart(2, '0')
 
-            const minutes = Math.floor(diff / (1000 * 60));
-
-            values[0].textContent = formatNumber(days);
-            values[1].textContent = formatNumber(hours);
-            values[2].textContent = formatNumber(minutes);
-
-            const percent = Math.min(100, Math.round(100 * (1 - (targetTime - now) / initialDiff)));
-            progressBar.style.width = percent + '%';
-
-            if (now >= targetTime) {
-                clearInterval(timerId);
-                progressBar.style.width = '100%';
-            }
+            const elapsed = now - new Date(startTime).getTime()
+            const percent = Math.min(Math.max((elapsed / total) * 100, 0), 100)
+            progressBar.style.width = percent + '%'
         }
 
-        updateTimer();
-        timerId = setInterval(updateTimer, 1000);
+        update()
+        const interval = setInterval(update, 1000)
     }
 
-// запуск
-    initCountdownTimer('.info__match-next-time');
+
+    initCountdown('.info__match-next-time', '2025-10-01T12:00:00', '2025-10-20T12:00:00')
+
 
 
     function setProgress(el, percent) {

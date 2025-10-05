@@ -1,55 +1,142 @@
-@media screen and (max-width: 1050px)
-  ._title
-    font-size: 20px
-    line-height: 20px
-  ._container
-    max-width: 725px
-    min-width: 725px
-  .bet
-    &__text
-      font-size: 11px
-    &__title
-      padding: 2px 0 2px 7px
+@media screen and (max-width: 950px)
+  .welcome
+    max-width: 880px
+    min-width: 880px
+    padding-left: 120px
+    &::after
+      width: 8%
+    &__right
+      margin-left: -50px
+      &-crown
+        max-width: 72px
+        top: 20px
+        left: 60px
+
+@media screen and (max-width: 680px)
+  .prize
+    &__bottom
+      scale: .9
+      margin: -40px 0
+
+@media screen and (max-width: 600px)
+  .btn
+    font-size: 14px
+  .welcome
+    max-width: 385px
+    min-width: 385px
+    padding: 0
     &__btn
-      &-item
-        font-size: 11px
-    &__column
-      max-width: 350px
-      &-name
-        margin-left: 4px
-        &-item
-          &:nth-child(1)
-            font-size: 12px
-          &:nth-child(2)
-            font-size: 10px
-      &-btn
-        font-size: 12px
-        padding: 4px
-        &::before
-          bottom: -14px
-          left: -9px
-      &-you
-        margin-right: 25px
-        font-size: 12px
-  .results
-    &__subtitle
-      max-width: 335px
-    &__top
-      scale: .85
-      transform-origin: bottom right
-      right: 10px
-      top: 20px
-    &__you
-      max-height: 50px
+      padding: 10px 16px
+      margin-top: 12px
+    &__right
+      max-width: 200px
+      min-width: 200px
+      height: 200px
+      padding-left: 10px
+      margin-left: 5px
       &-pers
-        max-width: 85px
-        margin: 0 2px -3px 10px
-    &__popup
-      &-text
-        font-size: 11px
-    &__prize
-      padding: 10px 17px 5px 0
-      &-amount
-        font-size: 20px
-      &-font
-        font-size: 17px
+        margin: 0
+      &-star
+        max-width: 29px
+        left: 0
+      &-crown
+        max-width: 45px
+        left: 12px
+        top: 8px
+      &-hammer
+        max-width: 48px
+        top: 0
+        left: 70px
+      &-cup
+        max-width: 70px
+        top: 0
+        right: -10px
+
+    &__title
+      &-top
+        &-item
+          font-size: 29px
+          &:nth-child(4)
+            font-size: 15px
+            margin-left: 3px
+      &-center
+        font-size: 34px
+      &-bottom
+        font-size: 29px
+  .info
+    flex-direction: column
+    &__left
+      text-align: center
+      font-size: 14px
+      margin: 0 0 15px 0
+    &__match
+      min-width: 365px
+      max-width: 365px
+      &-right
+        margin-left: 10px
+        width: 215px
+  .progress
+    width: 215px
+  .prize
+    &__title
+      font-size: 20px
+    &__desc
+      display: none
+    &__bottom
+      width: 360px
+      padding-top: 25px
+      .prize__mob
+        display: flex
+    &__item
+      &:nth-child(odd), &:nth-child(even)
+        align-self: flex-end
+      &:not(:last-child)
+        margin-top: 10px
+      &.prize
+        &__mob
+          background: url("../img/prize/100PointsBgMob.png") no-repeat 0 0/cover
+          background-size: 100% 100%
+          height: 116px
+          &::before
+            content: none
+          .prize
+            &__item
+              &-text
+                margin: 5px 0
+              &-right
+                opacity: 1
+                max-width: 131px
+                min-width: 131px
+                height: 131px
+                position: relative
+                left: 22px
+                top: 4px
+    &__bar
+      transform: none
+      left: 40px
+    &__btn
+      width: 95vw
+      max-width: 375px
+
+  .prize
+    &__bottom
+      scale: 1
+      margin: 0
+
+@media screen and (max-width: 374px)
+  .welcome, .info
+    transform: scale(.9)
+    transform-origin: center top
+    margin-bottom: -40px
+  .prize
+    &__bottom
+      position: relative
+      right: 20px
+
+@media screen and (max-width: 337px)
+  .welcome, .info
+    transform: scale(.8)
+    margin-bottom: -60px
+  .prize
+    &__bottom
+      right: 30px
