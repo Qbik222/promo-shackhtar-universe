@@ -71,9 +71,11 @@
     if (ukLeng) locale = 'uk';
     if (enLeng) locale = 'en';
 
-    let debug = true
+    let debug = false
 
-    if (debug) hideLoader()
+    if (debug) {
+        hideLoader()
+    }
 
     let i18nData = {};
     const translateState = true;
