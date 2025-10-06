@@ -100,8 +100,12 @@
         .prize__bottom
             .prize__bar
                 .progress-bar
+                    .progress-top 0/100
                     .progress-fill(style="height: 50%")
-                    .progress-label 50/100
+                        .progress-you
+                            .progress-youTxt(data-translate="you") You
+                            .progress-label 50/100
+
             .prize__items
                 .prize__item._active(data-amount-points="5")
                     .prize__item-left

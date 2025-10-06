@@ -118,18 +118,22 @@ body
       max-width: 99px
       top: 0
       left: 0
+      animation: float 3.6s ease-in-out infinite
     &-star
       max-width: 64px
       left: 44px
       bottom: 11px
+      animation: float 2.4s ease-in-out infinite
     &-hammer
       max-width: 106px
       top: -20px
       left: 220px
+      animation: float 3s ease-in-out infinite
     &-cup
       max-width: 154px
       top: -20px
       right: 0
+      animation: float 4.4s ease-in-out infinite
 
   &__title
     display: flex
@@ -332,6 +336,8 @@ body
     bottom: 130px
     transform: translate(-50%, 0)
     z-index: 1
+    animation: floatConsole 5.2s ease-in-out infinite
+
   &__decor
     position: absolute
     width: 100%
@@ -345,29 +351,35 @@ body
         left: 56px
         bottom: -17px
         z-index: 2
+        animation: float 3.2s ease-in-out infinite
       &:nth-child(2)
         max-width: 48px
         left: 113px
         bottom: 62px
         z-index: 1
+        animation: float 4s ease-in-out infinite
       &:nth-child(3)
         max-width: 53px
         left: 189px
         top: 113px
+        animation: float 3.5s ease-in-out infinite
       &:nth-child(4)
         max-width: 130px
         right: 100px
         top: 8px
         z-index: 2
+        animation: float 2.2s ease-in-out infinite
       &:nth-child(5)
         max-width: 49px
         top: 87px
         right: 127px
         z-index: 1
+        animation: float 4.2s ease-in-out infinite
       &:nth-child(6)
         max-width: 41px
         bottom: 90px
         right: 225px
+        animation: float 3.2s ease-in-out infinite
   &__amount
     width: 180px
     height: 46px
@@ -560,7 +572,7 @@ body
   height: 799px
   background: url("../img/prize/progress/progress-empty-desc.png") no-repeat 50% 0 / cover
   background-size: 108px 799px
-  overflow: hidden
+  //overflow: hidden
   @media screen and (max-width: 600px)
     width: 52px
     height: 1102px
@@ -573,26 +585,85 @@ body
   bottom: 0
   left: 0
   width: 100%
-  background: url("../img/prize/progress/progress-full-desc.png") no-repeat 50% 100% / cover
-  background-size: 108px 799px
   transition: height 0.5s ease
+  &::before
+    content: ""
+    position: absolute
+    width: 100%
+    height: 100%
+    background: url("../img/prize/progress/progress-full-desc.png") no-repeat 50% 100% / cover
+    background-size: 108px 799px
+    animation: opacity 3s alternate infinite
+    //transition: opacity 0.5s ease
   @media screen and (max-width: 600px)
     width: 52px
     height: 1082px
-    background: url("../img/prize/progress/progress-full-mob.png") no-repeat 50% 100% / cover
-    background-size: 52px 1102px
+    &::before
+      background: url("../img/prize/progress/progress-full-mob.png") no-repeat 50% 100% / cover
+      background-size: 52px 1102px
 
-.progress-label
+//.progress-label
+//  position: absolute
+//  top: -30px
+//  left: 50%
+//  transform: translateX(-50%)
+//  background: #1a1a3d
+//  color: #fff
+//  padding: 4px 8px
+//  border-radius: 8px
+//  font-size: 12px
+//  font-weight: bold
+
+.progress-top
   position: absolute
-  top: -30px
-  left: 50%
+  z-index: 2
+  width: 70px
+  height: 70px
+  background: url("../img/prize/progress/top.png") no-repeat 50% 50% / contain
+  left: 52.5%
   transform: translateX(-50%)
-  background: #1a1a3d
-  color: #fff
-  padding: 4px 8px
-  border-radius: 8px
-  font-size: 12px
-  font-weight: bold
+  top: 0
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: flex-end
+  color: $white
+  font-family: $font-roboto-condensed-regular
+  font-size: 14px
+  padding-bottom: 15px
+  @media screen and (max-width: 600px)
+    width: 52px
+    height: 52px
+    font-size: 10px
+    padding-bottom: 12px
+    left: 48%
+
+.progress-you
+  position: absolute
+  top: 0
+  left: 53%
+  transform: translate(-50%, -50%)
+  width: 84px
+  height: 71px
+  background: url("../img/prize/progress/you.png") no-repeat 50% 50% / contain
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  color: $white
+  font-family: $font-roboto-condensed-regular
+  font-size: 14px
+  & > *
+    font-family: inherit
+  @media screen and (max-width: 600px)
+    width: 52px
+    height: 44px
+    padding-right: 3px
+    font-size: 9px
+    left: -15%
+    //padding-bottom: 12px
+    background: url("../img/prize/progress/you-mob.png") no-repeat 50% 50% / contain
+
 
 
 .popups
@@ -805,3 +876,25 @@ body.dark
     transform: scale(.8)
   100%
     transform: scale(1)
+
+@keyframes float
+  0%
+    transform: translateY(0)
+  50%
+    transform: translateY(-7px)
+  100%
+    transform: translateY(0)
+
+@keyframes floatConsole
+  0%
+    transform: translate(-50%, 0)
+  50%
+    transform: translate(-50%, -7px)
+  100%
+    transform: translate(-50%, 0)
+
+@keyframes opacity
+  0%, 100%
+    opacity: 1
+  50%
+    opacity: .5
