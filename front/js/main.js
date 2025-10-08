@@ -465,6 +465,7 @@
     // loadTranslations()
     //     .then(init) // запуск ініту сторінки
 
+    setTimeout(hideLoader, 600);
 
     function initCountdown(selector, startTime, endTime) {
         const container = document.querySelector(selector)
