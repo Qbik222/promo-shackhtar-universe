@@ -1,6 +1,6 @@
 (function () {
 
-    const apiURL = 'https://fav-prom.com/api_your_promo'
+    const apiURL = 'https://fav-prom.com/api_shakhtar_new_game_universe'
 
     const getActiveWeek = (promoStartDate, weekDuration) => {
         const currentDate = new Date();
@@ -8,6 +8,7 @@
 
         const Day = 24 * 60 * 60 * 1000;
         const Week = weekDuration * Day;
+
 
         const formatDate = (date) =>
             `${date.getDate().toString().padStart(2, "0")}.${(date.getMonth() + 1).toString().padStart(2, "0")}`;
@@ -133,7 +134,7 @@
 
         function quickCheckAndRender() {
             checkUserAuth()
-                .then(loadUsers)
+                // .then(loadUsers)
                 .then(() =>{
                     setTimeout(hideLoader, 300);
                     document.querySelectorAll(".table__tabs-item").forEach((tab, i) =>{
@@ -165,16 +166,6 @@
             .then(json => {
                 i18nData = json;
                 translate();
-                const mutationObserver = new MutationObserver(function (mutations) {
-                    mutationObserver.disconnect();
-                    translate();
-                    mutationObserver.observe(targetNode, { childList: true, subtree: true });
-                });
-                mutationObserver.observe(document.getElementById("hardcoreTennis"), {
-                    childList: true,
-                    subtree: true
-                });
-
             });
     }
 
@@ -254,6 +245,7 @@
     }
 
     function refreshLocalizedClass(element) {
+        let baseCssClass = ""
         if (!element) {
             return;
         }
@@ -462,10 +454,11 @@
         });
     }
 
-    // loadTranslations()
-    //     .then(init) // запуск ініту сторінки
+    loadTranslations()
+        .then(init) // запуск ініту сторінки
 
-    setTimeout(hideLoader, 600);
+
+    // setTimeout(hideLoader, 600);
 
     function initCountdown(selector, startTime, endTime) {
         const container = document.querySelector(selector)
