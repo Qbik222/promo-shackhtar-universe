@@ -1,3 +1,20 @@
+button.menu-btn menu
+.menu-test
+    button.lng-btn en
+    button.auth-btn auth
+    button.menu-btn-popup popup
+    button.active-all active all
+    button.lock-all lock all
+    button.won-all won all
+    .menu-test-popup
+        button.popup-test(data-popup="100PointsPopup") 100Points Take
+        button.popup-test(data-popup="85PointsPopup") 85Points Take
+        button.popup-test(data-popup="50PointsPopup") 50Points Take
+        button.popup-test(data-popup="45PointsPopup") 45Points Take
+        button.popup-test(data-popup="40PointsPopup") 40Points Take
+        button.popup-test(data-popup="25PointsPopup") 25Points Take
+        button.popup-test(data-popup="10PointsPopup") 10Points Take
+        button.popup-test(data-popup="5PointsPopup") 5Points Take
 .fav-page.loading
     .spinner-overlay
         .spinner
@@ -11,9 +28,6 @@
                    span.welcome__title-top-item :
                .welcome__title-center(data-translate="welcomeTitleCenter") новий
                .welcome__title-bottom(data-translate="welcomeTitleBottom") всесвіт гри
-
-
-
            a.welcome__btn.btn.unauth-msg(data-translate="authBtn" href="/login" data-promo="shackhtar_universe_ua_20102025" data-button="auth_top") авторизуватись
            button.welcome__btn.btn.part-btn.hide(data-translate="joinBtn" data-promo="shackhtar_universe_ua_20102025" data-button="takePart_top") взяти участь
            a.welcome__btn.btn.btn-join.hide(data-translate="playBtn" href="#" data-promo="shackhtar_universe_ua_20102025" data-button="playBtn_top") до подій
@@ -33,7 +47,7 @@
                .welcome__right-cup
                    img(src="img/welcome/cup.png" alt="Favbet")
     .info
-        .info__left(data-translate="infoText") З ХХ.ХХ.2025 до ХХ.ХХ.2026 роби більше виграшних ставок на ігри команди "Шахтар" та отримай фірмові подарунки
+        .info__left(data-translate="infoText")
         .info__right
             .info__match(data-match="1")
                 .info__match-left
@@ -88,13 +102,15 @@
                         img(src="img/prize/circle.png" alt="Favbet")
                     .prize__decor-item
                         img(src="img/prize/gamepad.png" alt="Favbet")
-                .prize__amount(data-amount-points="100")
-                    .prize__amount-points 100 балів
-                    .prize__amount-lock
-                        img(src="img/prize/lock-icon.png" alt="Favbet")
-                    .prize__amount-text(data-translate="playstation") PS5
-                    .prize__amount-info
-                        img(src="img/info-icon.png" alt="Favbet")
+                .prize__amount.win(data-amount-points="100")
+                    .prize__amount-wrap
+                        .prize__amount-points 100 балів
+                        .prize__amount-lock
+                            img(src="img/prize/lock-icon.png" alt="Favbet")
+                        .prize__amount-text(data-translate="playstation") PS5
+                        .prize__amount-info
+                            img(src="img/info-icon.png" alt="Favbet")
+                    button.prize__item-btn(data-translate="chooseBtn") обрати
 
         .prize__bottom
             .prize__bar
@@ -206,12 +222,150 @@
                         p.circle За межами стадіонів фанати купували за мінімальною ціною (згодом квитки почали поширюватися через газети, їх вирізали);
                         p.circle За межами стадіонів фанати купували за мінімальною ціною (згодом квитки почали поширюватися через газети, їх вирізали);
     .popups._opacity
-        .popup(data-popup="100PointsPopup")
-            .popup__close
-            .popup__title(data-translate="popupTitle") Ти хочеш обрати подарунок
-            .popup__img
-                img(src="img/popup/100PointsPrize.png" alt="favbet")
-            .popup__subtitle(data-translate="100PointsPopupPrize") Ігрову консоль PS5?
-            .popup__text(data-translate="popupText") Твій прогрес обнулиться після підтвердження вибору подарунка
-            button.popup__btn.btn(data-translate="btnConfirm") Підтвердити
-            button.popup__btn.btn-cancel(data-translate="btnCancel") Скасувати
+        .popup(data-popup="100PointsPopup" data-popup-amount="100")
+            .popup__wrap
+                .popup__close
+                .popup__title(data-translate="popupTitle") Ти хочеш обрати подарунок
+                .popup__img
+                    img(src="img/popup/100PointsPrize.png" alt="favbet")
+                .popup__subtitle(data-translate="100PointsPopupPrize") Ігрову консоль PS5?
+                .popup__text(data-translate="popupText") Твій прогрес обнулиться після підтвердження вибору подарунка
+                button.popup__btn.btn(data-translate="btnConfirm" data-confirm="unconfirmed" data-action="takeBonus") 
+                a.popup__btn.btn.hide(data-translate="toMatchLink" href="#" data-confirm="confirmed") 
+                button.popup__btn.btn.btn-cancel(data-translate="btnCancel" data-confirm="unconfirmed") Скасувати
+        .popup(data-popup="85PointsPopup" data-popup-amount="85")
+            .popup__wrap
+                .popup__close
+                .popup__title(data-translate="popupTitle")
+                .popup__img
+                    img(src="img/popup/85PointsPrize.png" alt="favbet")
+                .popup__subtitle(data-translate="popupTitle7")
+                .popup__text(data-translate="popupText")
+                button.popup__btn.btn(data-translate="btnConfirm" data-confirm="unconfirmed" data-action="takeBonus")
+                a.popup__btn.btn.hide(data-translate="toMatchLink" href="#" data-confirm="confirmed") 
+                button.popup__btn.btn.btn-cancel(data-translate="btnCancel" data-confirm="unconfirmed")
+        .popup(data-popup="50PointsPopup" data-popup-amount="50")
+            .popup__wrap
+                .popup__close
+                .popup__title(data-translate="popupTitle")
+                .popup__img
+                    img(src="img/popup/50PointsPrize.png" alt="favbet")
+                .popup__subtitle(data-translate="popupTitle4")
+                .popup__text(data-translate="popupText")
+                button.popup__btn.btn(data-translate="btnConfirm" data-confirm="unconfirmed" data-action="takeBonus")
+                a.popup__btn.btn.hide(data-translate="toMatchLink" href="#" data-confirm="confirmed") 
+                button.popup__btn.btn.btn-cancel(data-translate="btnCancel" data-confirm="unconfirmed")
+        .popup(data-popup="45PointsPopup" data-popup-amount="45")
+            .popup__wrap
+                .popup__close
+                .popup__title(data-translate="popupTitle")
+                .popup__img
+                    img(src="img/popup/45PointsPrize.png" alt="favbet")
+                .popup__subtitle(data-translate="popupTitle5")
+                .popup__text(data-translate="popupText")
+                button.popup__btn.btn(data-translate="btnConfirm" data-confirm="unconfirmed" data-action="takeBonus")
+                a.popup__btn.btn.hide(data-translate="toMatchLink" href="#" data-confirm="confirmed")
+                button.popup__btn.btn.btn-cancel(data-translate="btnCancel" data-confirm="unconfirmed")
+        .popup(data-popup="40PointsPopup" data-popup-amount="40")
+            .popup__wrap
+                .popup__close
+                .popup__title(data-translate="popupTitle")
+                .popup__img
+                    img(src="img/popup/40PointsPrize.png" alt="favbet")
+                .popup__subtitle(data-translate="popupTitle6")
+                .popup__text(data-translate="popupText")
+                button.popup__btn.btn(data-translate="btnConfirm" data-confirm="unconfirmed" data-action="takeBonus")
+                a.popup__btn.btn.hide(data-translate="toMatchLink" href="#" data-confirm="confirmed")
+                button.popup__btn.btn.btn-cancel(data-translate="btnCancel" data-confirm="unconfirmed")
+        .popup(data-popup="25PointsPopup" data-popup-amount="25")
+            .popup__wrap
+                .popup__close
+                .popup__title(data-translate="popupTitle")
+                .popup__img
+                    img(src="img/popup/25PointsPrize.png" alt="favbet")
+                .popup__subtitle(data-translate="popupTitle3")
+                .popup__text(data-translate="popupText")
+                button.popup__btn.btn(data-translate="btnConfirm" data-confirm="unconfirmed" data-action="takeBonus")
+                a.popup__btn.btn.hide(data-translate="toMatchLink" href="#" data-confirm="confirmed")
+                button.popup__btn.btn.btn-cancel(data-translate="btnCancel" data-confirm="unconfirmed")
+        .popup(data-popup="10PointsPopup" data-popup-amount="10")
+            .popup__wrap
+                .popup__close
+                .popup__title(data-translate="popupTitle")
+                .popup__img
+                    img(src="img/popup/10PointsPrize.png" alt="favbet")
+                .popup__subtitle(data-translate="popupTitle2")
+                .popup__text(data-translate="popupText")
+                button.popup__btn.btn(data-translate="btnConfirm" data-confirm="unconfirmed" data-action="takeBonus")
+                a.popup__btn.btn.hide(data-translate="toMatchLink" href="#" data-confirm="confirmed")
+                button.popup__btn.btn.btn-cancel(data-translate="btnCancel" data-confirm="unconfirmed")
+        .popup(data-popup="5PointsPopup" data-popup-amount="5")
+            .popup__wrap
+                .popup__close
+                .popup__title(data-translate="popupTitle")
+                .popup__img
+                    img(src="img/popup/5PointsPrize.png" alt="favbet")
+                .popup__subtitle(data-translate="popupTitle1")
+                .popup__text(data-translate="popupText")
+                button.popup__btn.btn(data-translate="btnConfirm" data-confirm="unconfirmed" data-action="takeBonus")
+                a.popup__btn.btn.hide(data-translate="toMatchLink" href="#" data-confirm="confirmed")
+                button.popup__btn.btn.btn-cancel(data-translate="btnCancel" data-confirm="unconfirmed")
+
+        /// info popups
+
+        .popup.popup--info(data-popup="100PointsPopupInfo")
+            .popup__wrap
+                .popup__close
+                .popup__img
+                    img(src="img/popup/100PointsPrize.png" alt="favbet")
+                .popup__subtitle(data-translate="100PointsPopupPrize")
+                .popup__text(data-translate="popupText8")
+        .popup.popup--info(data-popup="85PointsPopupInfo")
+            .popup__wrap
+                .popup__close
+                .popup__img
+                    img(src="img/popup/85PointsPrize.png" alt="favbet")
+                .popup__subtitle(data-translate="popupTitle7")
+                .popup__text(data-translate="popupText7")
+        .popup.popup--info(data-popup="50PointsPopupInfo")
+            .popup__wrap
+                .popup__close
+                .popup__img
+                    img(src="img/popup/50PointsPrize.png" alt="favbet")
+                .popup__subtitle(data-translate="popupTitle4")
+                .popup__text(data-translate="popupText4")
+        .popup.popup--info(data-popup="45PointsPopupInfo")
+            .popup__wrap
+                .popup__close
+                .popup__img
+                    img(src="img/popup/45PointsPrize.png" alt="favbet")
+                .popup__subtitle(data-translate="popupTitle5")
+                .popup__text(data-translate="popupText5")
+        .popup.popup--info(data-popup="40PointsPopupInfo")
+            .popup__wrap
+                .popup__close
+                .popup__img
+                    img(src="img/popup/40PointsPrize.png" alt="favbet")
+                .popup__subtitle(data-translate="popupTitle6")
+                .popup__text(data-translate="popupText6")
+        .popup.popup--info(data-popup="25PointsPopupInfo")
+            .popup__wrap
+                .popup__close
+                .popup__img
+                    img(src="img/popup/25PointsPrize.png" alt="favbet")
+                .popup__subtitle(data-translate="popupTitle3")
+                .popup__text(data-translate="popupText3")
+        .popup.popup--info(data-popup="10PointsPopupInfo")
+            .popup__wrap
+                .popup__close
+                .popup__img
+                    img(src="img/popup/10PointsPrize.png" alt="favbet")
+                .popup__subtitle(data-translate="popupTitle2")
+                .popup__text(data-translate="popupText2")
+        .popup.popup--info(data-popup="5PointsPopupInfo")
+            .popup__wrap
+                .popup__close
+                .popup__img
+                    img(src="img/popup/5PointsPrize.png" alt="favbet")
+                .popup__subtitle(data-translate="popupTitle1")
+                .popup__text(data-translate="popupText1")

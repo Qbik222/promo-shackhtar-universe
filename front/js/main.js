@@ -52,7 +52,11 @@
         unauthMsgs = document.querySelectorAll('.unauth-msg'),
         participateBtns = document.querySelectorAll('.part-btn'),
         redirectBtns = document.querySelectorAll('.btn-join'),
-        loader = document.querySelector(".spinner-overlay")
+        loader = document.querySelector(".spinner-overlay"),
+        closePopups = document.querySelectorAll('.popup__close'),
+        prizeItems = document.querySelectorAll('[data-amount-points]'),
+        takeBonusBtns = document.querySelectorAll('[data-action="takeBonus"]');
+
 
     const ukLeng = document.querySelector('#ukLeng');
     const enLeng = document.querySelector('#enLeng');
@@ -66,8 +70,8 @@
 
     let loaderBtn = false
 
-    let locale = "en"
-    // let locale = sessionStorage.getItem("locale") || "uk"
+    // let locale = "en"
+    let locale = sessionStorage.getItem("locale") || "uk"
 
     if (ukLeng) locale = 'uk';
     if (enLeng) locale = 'en';
@@ -80,8 +84,8 @@
 
     let i18nData = {};
     const translateState = true;
-    let userId = null;
-    // let userId = Number(sessionStorage.getItem("userId")) ?? null
+    // let userId = null;
+    let userId = Number(sessionStorage.getItem("userId")) ?? null
 
     const request = function (link, extraOptions) {
         return fetch(apiURL + link, {
@@ -118,6 +122,55 @@
         mainPage.classList.remove("loading")
     }
 
+    function setWonItem(item){
+        item.classList.add('won');
+        item.classList.remove('active');
+
+        const points = item.querySelector('.prize__amount-points') ?? item.querySelector('.prize__item-points');
+
+        points.textContent = translateKey("won")
+    }
+
+    function setLockItem(item){
+        item.classList.remove('won');
+        item.classList.remove('active');
+
+        const amount = item.getAttribute('data-amount-points');
+
+        const points = item.querySelector('.prize__amount-points') ?? item.querySelector('.prize__item-points');
+
+        points.textContent = `${amount} ${translateKey("points")}`
+
+    }
+
+    function setActiveItem(item){
+        item.classList.remove('won');
+        item.classList.add('active');
+
+        const amount = item.getAttribute('data-amount-points');
+
+        const points = item.querySelector('.prize__amount-points') ?? item.querySelector('.prize__item-points');
+
+        points.textContent = `${amount} ${translateKey("points")}`
+
+    }
+
+    function confirmPrize(popup, item){
+        const confirmButton = popup.querySelector('[data-confirm="confirmed"]');
+        const unconfirmButtons = popup.querySelectorAll('[data-confirm="unconfirmed"]');
+
+        setActiveItem(item);
+
+        popup.classList.add("confirmed");
+
+        confirmButton.classList.remove('hide');
+
+        unconfirmButtons.forEach((el, i) => {
+            el.classList.add('hide');
+        })
+
+    }
+
     async function init() {
         let attempts = 0;
         const maxAttempts = 20;
@@ -132,6 +185,7 @@
             }
         }
 
+
         function quickCheckAndRender() {
             checkUserAuth()
                 // .then(loadUsers)
@@ -143,6 +197,58 @@
                     })
                     // renderUsers(activeWeek, tableData);
                     participateBtns.forEach(btn => btn.addEventListener('click', participate));
+                    document.querySelector('.popups').addEventListener('click', (e) => {
+                        const openPopupEl = document.querySelector('.popup.active');
+                        if(openPopupEl){
+                            // console.log(openPopupEl)
+                            const contentWrap = openPopupEl.querySelector('.popup__wrap');
+                            // console.log(contentWrap);
+                            const closeBtn = openPopupEl.querySelector('.popup__close');
+                            const cancelBtn = openPopupEl.querySelector('.btn-cancel');
+                            if (contentWrap && !contentWrap.contains(e.target)) {
+                                closeAllPopups();
+                            }
+                            if(e.target === closeBtn || e.target === cancelBtn) {
+                                closeAllPopups();
+                            }
+                        }
+
+                    });
+                    prizeItems.forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            const points = btn.getAttribute('data-amount-points');
+                            if (e.target.closest('.prize__item-btn')) {
+                                openPopupByAttr(`${points}PointsPopup`);
+                            } else {
+                                openPopupByAttr(`${points}PointsPopupInfo`);
+                            }
+                        });
+                    });
+
+                    takeBonusBtns.forEach(btn => {
+                        console.log(btn)
+                        btn.addEventListener('click', (e) => {
+                            const popup = document.querySelector(".popup.active");
+
+                            const popupAmount = popup.getAttribute('data-popup-amount');
+
+                            let itemPrize = null
+
+                            prizeItems.forEach(item => {
+                                const itemAmount = item.getAttribute('data-amount-points');
+
+                                if(itemAmount === popupAmount){
+                                    itemPrize = item;
+                                }
+
+                            })
+
+
+                            confirmPrize(popup, itemPrize);
+
+                        })
+                    })
+
                 })
             }
 
@@ -162,7 +268,7 @@
     }
 
     function loadTranslations() {
-        return request(`/new-translates/${locale}`)
+        return request(`/new-translates/${locale}?nocache=1`)
             .then(json => {
                 i18nData = json;
                 translate();
@@ -454,6 +560,29 @@
         });
     }
 
+    function openPopupByAttr(popupAttr) {
+
+        const allPopups = document.querySelectorAll('.popup');
+        allPopups.forEach(p => p.classList.remove('active'));
+        mainPage.classList.add('overlay');
+
+        const targetPopup = document.querySelector(`.popup[data-popup="${popupAttr}"]`);
+        console.log(targetPopup)
+        console.log(popupAttr)
+        if (targetPopup) {
+            document.body.style.overflow = 'hidden';
+            targetPopup.classList.add('active');
+            // mainPage.classList.add('overlay');
+            document.querySelector('.popups').classList.remove('_opacity');
+        }
+    }
+    function closeAllPopups() {
+        document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+        document.querySelector('.popups').classList.add('_opacity');
+        document.body.style.overflow = 'auto';
+        mainPage.classList.remove('overlay');
+    }
+
     loadTranslations()
         .then(init) // запуск ініту сторінки
 
@@ -528,6 +657,64 @@
     const bar = document.querySelector('.progress-bar');
     setProgress(bar, 75);
 
+// TEST
 
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelector(".menu-btn")?.addEventListener("click", () => {
+            document.querySelector(".menu-test")?.classList.toggle("hide");
+        });
+    });
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelector(".menu-btn-popup")?.addEventListener("click", () => {
+            document.querySelector(".menu-test-popup")?.classList.toggle("hide");
+        });
+    });
+
+    document.querySelectorAll(".popup-test").forEach((el) => {
+        el.addEventListener("click", () => {
+            const attr = el.getAttribute("data-popup");
+            openPopupByAttr(attr);
+        })
+    })
+
+    const lngBtn = document.querySelector(".lng-btn")
+
+    lngBtn.addEventListener("click", () => {
+        if (sessionStorage.getItem("locale")) {
+            sessionStorage.removeItem("locale");
+        } else {
+            sessionStorage.setItem("locale", "en");
+        }
+        window.location.reload();
+    });
+
+    const authBtn = document.querySelector(".auth-btn")
+    const betBtn = document.querySelector(".btn-bet-online")
+
+    authBtn.addEventListener("click", () =>{
+        if(userId){
+            sessionStorage.removeItem("userId")
+        }else{
+            sessionStorage.setItem("userId", "777777")
+        }
+        window.location.reload()
+    });
+
+
+    const btnActiveAll = document.querySelector('.active-all');
+    const btnLockAll = document.querySelector('.lock-all');
+    const btnWonAll = document.querySelector('.won-all');
+
+    btnActiveAll.addEventListener('click', () => {
+        prizeItems.forEach(item => setActiveItem(item));
+    });
+
+    btnLockAll.addEventListener('click', () => {
+        prizeItems.forEach(item => setLockItem(item));
+    });
+
+    btnWonAll.addEventListener('click', () => {
+        prizeItems.forEach(item => setWonItem(item));
+    });
 
 })();

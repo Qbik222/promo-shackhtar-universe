@@ -1,3 +1,39 @@
+//test
+.menu-btn
+  position: fixed
+  top: 0
+  left: 0
+  z-index: 20
+  width: fit-content
+  background: white
+  padding: 3px
+
+.menu-test
+  position: fixed
+  left: 0
+  top: 25px
+  z-index: 20
+  display: flex
+  gap: 2px
+  flex-direction: column
+  & > button
+    width: fit-content
+    background: white
+    color: black
+    padding: 2px
+    font-family: inherit
+    border-radius: 2px
+  &-popup
+    display: flex
+    flex-direction: column
+    & > button
+      width: fit-content
+      background: white
+      color: black
+      padding: 2px
+      font-family: inherit
+      border-radius: 2px
+
 .hide
   display: none !important
 
@@ -393,6 +429,16 @@ body
     left: 50%
     transform: translateX(-50%)
     bottom: 20px
+    cursor: pointer
+    .prize__item-btn
+      display: none
+    &-wrap
+      display: inherit
+      align-items: center
+      flex-direction: row
+      justify-content: center
+      width: 100%
+      height: 100%
     &-lock
       max-width: 29px
       margin: 0 6px
@@ -412,6 +458,34 @@ body
       width: 13px
       height: 17px
       margin-left: 6px
+    &.active
+      width: 152px
+      height: 82px
+      flex-direction: column
+      background: url("../img/prize/100PointsBgDescActive.png") no-repeat 0 0 / cover
+      background-size: 100% 100%
+      .prize__item-btn
+        display: inline-block
+      .prize
+        &__amount
+          &-wrap
+            height: auto
+            margin-bottom: 10px
+          &-points
+            margin-right: 5px
+          &-lock
+            display: none
+    &.won
+      width: 140px
+      .prize
+        &__amount
+          &-lock
+            display: none
+          &-points
+            margin-right: 5px
+        &__item
+          &-btn
+            display: none
   &__bottom
     position: relative
     width: 665px
@@ -437,6 +511,7 @@ body
     border-radius: 18px
     background: linear-gradient(180deg, rgba(37, 3, 35, 0.60) 0%, rgba(21, 12, 127, 0.60) 100%)
     position: relative
+    cursor: pointer
     &:nth-child(even)
       align-self: flex-start
     &:nth-child(odd)
@@ -505,10 +580,14 @@ body
       border: none
       border-radius: 6px
       width: fit-content
-    &._active
+      transition: all .3s ease
+      &:hover
+        background: rgba($white, 0.85)
+    &.active, &.won
       box-shadow: 0 0 20px 0 rgba(255, 38, 126, 0.40) inset
       border: 1px solid #01147F
       background: linear-gradient(180deg, #250323 0%, #150C7F 100%)
+      cursor: pointer
       .prize
         &__item
           &-btn
@@ -519,6 +598,9 @@ body
               content: none
           &-right
             opacity: 1
+    &.won
+      .prize__item-btn
+        display: none
   &__last
     display: flex
     align-items: center
@@ -684,15 +766,34 @@ body
     opacity: 0
     pointer-events: none
 .popup
-  display: flex
+  //display: flex
+  display: none
   flex-direction: column
   align-items: center
   background: $white
   border-radius: 6px
   width: 375px
   height: 420px
-  padding: 48px 16px 24px 16px
   position: relative
+  &.confirmed
+    height: fit-content
+  &--info
+    height: fit-content
+    .popup
+      &__text
+        margin-bottom: 0
+        text-align: center
+      //&__wrap
+        //padding-top: 25px
+  &.active
+    display: flex
+  &__wrap
+    display: inherit
+    flex-direction: inherit
+    align-items: inherit
+    width: 100%
+    height: 100%
+    padding: 48px 16px 24px 16px
   &__close
     position: absolute
     right: 16px
@@ -786,6 +887,10 @@ body
     overflow-y: auto
     //border: 1px solid $white
     scrollbar-width: auto
+    font-family: $font-roboto-condensed-regular
+    font-size: 14px
+    line-height: 18px
+    color: $white
     &::-webkit-scrollbar-thumb
       background: $green
       width: 3px
