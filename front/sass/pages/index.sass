@@ -54,6 +54,7 @@ body
   display: inline-flex
   align-items: center
   justify-content: center
+  white-space: nowrap
   //height: 50px
   //padding: 12px 20px
   background: $green
@@ -857,6 +858,10 @@ body
     margin-bottom: 15px
   .dropdown[open] summary::before
     transform:  rotate(180deg)
+  summary::-webkit-details-marker
+    display: none
+    > summary
+      list-style: none
   summary
     list-style: none
     padding: 8px 0 12px 0

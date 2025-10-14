@@ -158,10 +158,15 @@
     function confirmPrize(popup, item){
         const confirmButton = popup.querySelector('[data-confirm="confirmed"]');
         const unconfirmButtons = popup.querySelectorAll('[data-confirm="unconfirmed"]');
+        const title = popup.querySelector('.popup__title');
+        const text = popup.querySelector('.popup__text');
 
         setActiveItem(item);
 
         popup.classList.add("confirmed");
+
+        title.innerHTML = translateKey("popupTitleYouChose")
+        text.innerHTML = translateKey("popupTextYouChose")
 
         confirmButton.classList.remove('hide');
 
