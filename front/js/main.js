@@ -2,50 +2,31 @@
 
     const apiURL = 'https://fav-prom.com/api_shakhtar_new_game_universe'
 
-    const getActiveWeek = (promoStartDate, weekDuration) => {
-        const currentDate = new Date();
-        let weekDates = [];
 
-        const Day = 24 * 60 * 60 * 1000;
-        const Week = weekDuration * Day;
-
-
-        const formatDate = (date) =>
-            `${date.getDate().toString().padStart(2, "0")}.${(date.getMonth() + 1).toString().padStart(2, "0")}`;
-
-        const calculateWeekPeriod = (weekIndex) => {
-            const baseStart = promoStartDate.getTime();
-            const start = new Date(baseStart + weekIndex * Week);
-            let end = new Date(start.getTime() + (weekDuration * Day - 1));
-            return { start, end };
-        };
-
-        let activeWeekIndex = null;
-
-        // Перевірка поточного тижня
-        for (let i = 0; i < 10; i++) { // Обмежуємо 10 тижнями (якщо потрібно більше, просто змініть лічильник)
-            const { start, end } = calculateWeekPeriod(i);
-            if (currentDate >= start && currentDate <= end) {
-                activeWeekIndex = i + 1;
-                break;
-            }
-        }
-
-        return activeWeekIndex;
-    };
-
-    const promoStartDate = new Date("2025-05-05T00:00:00");
-    const weekDuration = 10;
 
     let isVerifiedUser = false;
 
-    let periodAmount = 2 // кількість періодів в акції, треба для кешування інфи з табли
+    const promoStartDate = new Date("2025-10-14");
 
-    let tableData = []
-    let activeWeek = getActiveWeek(promoStartDate, weekDuration) || 1;
-    // let activeWeek = 2
 
-    if (activeWeek > 2) activeWeek = 2
+
+
+    const matches = [
+        { date: '2025-10-23T19:45:00', id: 1 },  // Ліга конференцій: Шахтар - Легія
+        { date: '2025-10-25T18:00:00', id: 2 },  // УПЛ: Шахтар - Кудрівка
+        { date: '2025-10-28T17:00:00', id: 3 },  // Кубок України: Динамо - Шахтар
+        { date: '2025-11-01T18:00:00', id: 4 },  // УПЛ: Шахтар - Динамо
+        { date: '2025-11-06T19:45:00', id: 5 },  // Ліга конференцій: Шахтар - Брейдаблік
+        { date: '2025-11-08T18:00:00', id: 6 },  // УПЛ: Шахтар - СК Полтава
+        { date: '2025-11-22T18:00:00', id: 7 },  // УПЛ: Оболонь - Шахтар
+        { date: '2025-11-27T22:00:00', id: 8 },  // Ліга конференцій: Шемрок Роверс - Шахтар
+        { date: '2025-11-29T18:00:00', id: 9 },  // УПЛ: Шахтар - Кривбас
+        { date: '2025-12-06T18:00:00', id: 10 }, // УПЛ: Колос - Шахтар
+        { date: '2025-12-11T22:00:00', id: 11 }, // Ліга конференцій: Хамрун Спартанс - Шахтар
+        { date: '2025-12-13T18:00:00', id: 12 }, // УПЛ: Шахтар - Епіцентр
+        { date: '2025-12-18T22:00:00', id: 13 }, // Ліга конференцій: Шахтар - Рієка
+    ];
+
 
 
     const mainPage = document.querySelector(".fav-page"),
@@ -53,9 +34,11 @@
         participateBtns = document.querySelectorAll('.part-btn'),
         redirectBtns = document.querySelectorAll('.btn-join'),
         loader = document.querySelector(".spinner-overlay"),
-        closePopups = document.querySelectorAll('.popup__close'),
         prizeItems = document.querySelectorAll('[data-amount-points]'),
-        takeBonusBtns = document.querySelectorAll('[data-action="takeBonus"]');
+        pointsBar = document.querySelector('.progress-bar'),
+        prizeBlock = document.querySelector('.prize'),
+        popups = document.querySelector('.popups'),
+        lastUpd = document.querySelector('.prize__last-upd')
 
 
     const ukLeng = document.querySelector('#ukLeng');
@@ -68,7 +51,6 @@
         el.removeAttribute('data-translate');
     });
 
-    let loaderBtn = false
 
     // let locale = "en"
     let locale = sessionStorage.getItem("locale") || "uk"
@@ -82,10 +64,13 @@
         hideLoader()
     }
 
+    let userPoints = 0
+
     let i18nData = {};
     const translateState = true;
-    // let userId = null;
-    let userId = Number(sessionStorage.getItem("userId")) ?? null
+    let userId = null;
+    // let userId = Number(sessionStorage.getItem("userId")) ?? null
+    userId = 100300268
 
     const request = function (link, extraOptions) {
         return fetch(apiURL + link, {
@@ -122,6 +107,60 @@
         mainPage.classList.remove("loading")
     }
 
+    function showNextMatch(testId) {
+        const now = new Date("2025-10-23T19:44:40");
+        let nextMatch = matches.find(match => new Date(match.date) > now) || matches[matches.length - 1];
+
+        const prevMatchIndex = matches.findIndex(match => match.id === nextMatch.id) - 1;
+        let prevMatchDate = prevMatchIndex >= 0
+            ? new Date(matches[prevMatchIndex].date)
+            : promoStartDate;
+
+        document.querySelectorAll('[data-match]').forEach(el => {
+            const matchId = Number(el.getAttribute('data-match'));
+
+            if (testId) {
+                nextMatch = matches.find(m => m.id === testId) || matches[0];
+                prevMatchDate = matches[nextMatch.id - 2]?.date || promoStartDate;
+            }
+
+            if (matchId === nextMatch.id) {
+                el.classList.remove('hide');
+                initCountdown('.info__match-next-time', prevMatchDate, nextMatch.date, el);
+            } else {
+                el.classList.add('hide');
+            }
+        });
+    }
+
+
+    // function showNextMatch(testId) {
+    //
+    //     const now = new Date();
+    //
+    //     let nextMatch = matches.find(match => new Date(match.date) > now) || matches[matches.length - 1];
+    //
+    //     const prevMatchIndex = matches.findIndex(match => match.id === nextMatch.id) - 1;
+    //     let prevMatchDate = prevMatchIndex >= 0
+    //         ? new Date(matches[prevMatchIndex].date)
+    //         : promoStartDate;
+    //
+    //     document.querySelectorAll('[data-match]').forEach(el => {
+    //         const matchId = Number(el.getAttribute('data-match'));
+    //
+    //         nextMatch = matches[3]
+    //         prevMatchDate = matches[nextMatch.id - 1].date || promoStartDate
+    //
+    //         if (matchId === nextMatch.id) {
+    //             el.classList.remove('hide');
+    //             initCountdown('.info__match-next-time', prevMatchDate, nextMatch.date, el)
+    //         } else {
+    //             el.classList.add('hide');
+    //         }
+    //     });
+    // }
+
+
     function setWonItem(item){
         item.classList.add('won');
         item.classList.remove('active');
@@ -147,6 +186,7 @@
         item.classList.remove('won');
         item.classList.add('active');
 
+        console.log(item)
         const amount = item.getAttribute('data-amount-points');
 
         const points = item.querySelector('.prize__amount-points') ?? item.querySelector('.prize__item-points');
@@ -156,12 +196,23 @@
     }
 
     function confirmPrize(popup, item){
+        console.log(item);
+
+        // request('/user/prize', {
+        //     method: 'POST'
+        //     body: JSON.stringify({
+        //         userid: userId,
+        //         prizeid
+        //     })
+        //
+        // })
+
         const confirmButton = popup.querySelector('[data-confirm="confirmed"]');
         const unconfirmButtons = popup.querySelectorAll('[data-confirm="unconfirmed"]');
         const title = popup.querySelector('.popup__title');
         const text = popup.querySelector('.popup__text');
 
-        setActiveItem(item);
+        setWonItem(item);
 
         popup.classList.add("confirmed");
 
@@ -175,6 +226,19 @@
         })
 
     }
+
+    function setLastUpdatedText(element, dateString, locale) {
+        const lastUpdLocale = locale === 'uk' ? 'uk-UA' : 'en-US';
+        const formattedDate = new Date(dateString).toLocaleString(lastUpdLocale, {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+        });
+        element.textContent = formattedDate;
+    }
+
 
     async function init() {
         let attempts = 0;
@@ -193,17 +257,83 @@
 
         function quickCheckAndRender() {
             checkUserAuth()
-                // .then(loadUsers)
                 .then(() =>{
                     setTimeout(hideLoader, 300);
-                    document.querySelectorAll(".table__tabs-item").forEach((tab, i) =>{
-                        tab.classList.remove('active');
-                        if(i === activeWeek - 1) tab.classList.add('active');
-                    })
-                    // renderUsers(activeWeek, tableData);
-                    participateBtns.forEach(btn => btn.addEventListener('click', participate));
-                    document.querySelector('.popups').addEventListener('click', (e) => {
+
+                    showNextMatch()
+
+                    prizeBlock.addEventListener('click', (e) => {
+                        const prizeItem = e.target.closest('[data-amount-points]');
+
+                        // Якщо натиснули на приз
+                        if (prizeItem) {
+                            const points = prizeItem.getAttribute('data-amount-points');
+
+                            if (e.target.closest('.prize__item-btn')) {
+                                openPopupByAttr(`${points}PointsPopup`);
+                            } else {
+                                openPopupByAttr(`${points}PointsPopupInfo`);
+                            }
+                        }
+                    });
+
+                    mainPage.addEventListener('click', (e) => {
+                        const participateBtn = e.target.closest('.part-btn');
+                        if (participateBtn) {
+                            // логіка участі
+                            participate()
+                            return;
+                        }
+
+                    });
+
+                    popups.addEventListener('click', (e) => {
+                        const takeBtn = e.target.closest('[data-action="takeBonus"]');
+                        const closeBtn = e.target.closest('.popup__close');
                         const openPopupEl = document.querySelector('.popup.active');
+
+
+                        // Якщо натиснули на кнопку "Взяти бонус"
+                        if (takeBtn) {
+                            const popup = document.querySelector(".popup.active");
+                            if (!popup) return;
+
+                            const popupAmount = Number(popup.getAttribute('data-popup-amount'));
+                            const itemPrize = prizeBlock.querySelector(`[data-amount-points="${popupAmount}"]`);
+
+                            if(userPoints >= popupAmount){
+                                toggleClasses([takeBtn], "loader")
+                                toggleTranslates([takeBtn], "loader")
+                                request('/user/prize', {
+                                    method: "POST",
+                                    body: JSON.stringify({
+                                        userid: userId,
+                                        prizeid: popupAmount
+                                    })
+                                }).then(res =>{
+                                    setTimeout(() =>{
+                                        toggleTranslates([takeBtn], "loader_ready")
+                                        toggleClasses([takeBtn], "done")
+                                        setCardState(prizeItems, res.user.prizes, res.user.points)
+                                        setLastUpdatedText(lastUpd, res.user.lastUpdated, locale);
+                                        setTimeout(() =>{
+                                            confirmPrize(popup, itemPrize);
+                                        }, 100)
+                                    }, 500)
+                                })
+
+                            }
+
+                            return;
+                        }
+
+                        // хрестик щоб закривав попап
+                        if (closeBtn) {
+                            closeAllPopups();
+                            return;
+                        }
+
+                        // закриваєм попап якщо клікнули за його межами
                         if(openPopupEl){
                             // console.log(openPopupEl)
                             const contentWrap = openPopupEl.querySelector('.popup__wrap');
@@ -217,41 +347,6 @@
                                 closeAllPopups();
                             }
                         }
-
-                    });
-                    prizeItems.forEach(btn => {
-                        btn.addEventListener('click', (e) => {
-                            const points = btn.getAttribute('data-amount-points');
-                            if (e.target.closest('.prize__item-btn')) {
-                                openPopupByAttr(`${points}PointsPopup`);
-                            } else {
-                                openPopupByAttr(`${points}PointsPopupInfo`);
-                            }
-                        });
-                    });
-
-                    takeBonusBtns.forEach(btn => {
-                        console.log(btn)
-                        btn.addEventListener('click', (e) => {
-                            const popup = document.querySelector(".popup.active");
-
-                            const popupAmount = popup.getAttribute('data-popup-amount');
-
-                            let itemPrize = null
-
-                            prizeItems.forEach(item => {
-                                const itemAmount = item.getAttribute('data-amount-points');
-
-                                if(itemAmount === popupAmount){
-                                    itemPrize = item;
-                                }
-
-                            })
-
-
-                            confirmPrize(popup, itemPrize);
-
-                        })
                     })
 
                 })
@@ -280,9 +375,11 @@
             });
     }
 
-
     function checkUserAuth() {
         console.log(userId)
+        lastUpd.classList.add('hide');
+        setProgress(pointsBar, 0)
+        setCardState(prizeItems, [], 0)
         if (userId) {
             for (const unauthMes of unauthMsgs) {
                 unauthMes.classList.add('hide');
@@ -290,10 +387,18 @@
             return request(`/favuser/${userId}?nocache=1`)
                 .then(res => {
                     if (res.userid) {
+                        userPoints = res.points;
                         participateBtns.forEach(item => item.classList.add('hide'));
                         redirectBtns.forEach(item => item.classList.remove('hide'));
                         isVerifiedUser = true;
-                        console.log(isVerifiedUser)
+                        setProgress(pointsBar, userPoints)
+
+                        const lastUpdLocale = locale === "uk" ? 'uk-UA' : "en-US"
+
+                        lastUpd.classList.remove('hide');
+                        setLastUpdatedText(lastUpd, res.lastUpdated, locale);
+                        setCardState(prizeItems, res.prizes, userPoints)
+
                     } else {
                         participateBtns.forEach(item => item.classList.remove('hide'));
                         redirectBtns.forEach(item => item.classList.add('hide'));
@@ -513,8 +618,6 @@
             body: JSON.stringify(params)
         }).then(res => res.json())
             .then(res => {
-                console.log(res);
-                loaderBtn = true
                 toggleClasses(participateBtns, "loader")
                 toggleTranslates(participateBtns, "loader")
                 setTimeout(() =>{
@@ -524,9 +627,6 @@
                 }, 500)
                 setTimeout(()=>{
                     checkUserAuth()
-                    loadUsers("?nocache=1").then(res => {
-                        renderUsers(activeWeek, tableData)
-                    })
                 }, 1000)
 
             })
@@ -545,26 +645,6 @@
                 return Promise.reject(err);
             });
     }
-    function loadUsers(parametr) {
-        const requests = [];
-        tableData.length = 0
-
-        for (let i = 1; i <= periodAmount; i++) {
-            const week = i; // або будь-яка логіка для формування номера тижня
-            const req = request(`/users/${week}${parametr ? parametr : ""}`).then(data => {
-                console.log(data);
-                tableData.push({ week, users: data });
-            });
-
-            requests.push(req);
-        }
-
-        return Promise.all(requests)
-        .catch(error => {
-            console.error('Error loading users:', error);
-        });
-    }
-
     function openPopupByAttr(popupAttr) {
 
         const allPopups = document.querySelectorAll('.popup');
@@ -594,41 +674,48 @@
 
     // setTimeout(hideLoader, 600);
 
-    function initCountdown(selector, startTime, endTime) {
-        const container = document.querySelector(selector)
+    function initCountdown(selector, startTime, endTime, elem) {
+        const container = elem.querySelector(selector)
+        console.log(container)
         if (!container) return
 
         container.innerHTML = `
-    <div class="timer">
-      <span class="days">00</span>Д :
-      <span class="hours">00</span>Г :
-      <span class="minutes">00</span>Х
-    </div>
-    <div class="progress">
-      <div class="progress__bar"></div>
-    </div>
-  `
+        <div class="timer">
+            <span class="days">00</span>Д :
+            <span class="hours">00</span>Г :
+            <span class="minutes">00</span>Х
+        </div>
+        <div class="progress">
+            <div class="progress__bar"></div>
+        </div>
+    `
 
         const daysEl = container.querySelector('.days')
         const hoursEl = container.querySelector('.hours')
         const minutesEl = container.querySelector('.minutes')
         const progressBar = container.querySelector('.progress__bar')
 
-        const total = new Date(endTime).getTime() - new Date(startTime).getTime()
+        const start = new Date(startTime).getTime()
+        const end = new Date(endTime).getTime()
+        const total = end - start
 
         function update() {
             const now = Date.now()
-            const diff = new Date(endTime).getTime() - now
+            const diff = end - now
 
+            // Якщо таймер закінчився
             if (diff <= 0) {
+                console.log("end")
                 daysEl.textContent = '00'
                 hoursEl.textContent = '00'
                 minutesEl.textContent = '00'
                 progressBar.style.width = '100%'
                 clearInterval(interval)
+                showNextMatch()
                 return
             }
 
+            // Таймер: скільки залишилось до кінця
             const days = Math.floor(diff / (1000 * 60 * 60 * 24))
             const hours = Math.floor((diff / (1000 * 60 * 60)) % 24)
             const minutes = Math.floor((diff / (1000 * 60)) % 60)
@@ -637,7 +724,8 @@
             hoursEl.textContent = String(hours).padStart(2, '0')
             minutesEl.textContent = String(minutes).padStart(2, '0')
 
-            const elapsed = now - new Date(startTime).getTime()
+            // Прогрес: скільки вже минуло від startTime до endTime
+            const elapsed = now - start
             const percent = Math.min(Math.max((elapsed / total) * 100, 0), 100)
             progressBar.style.width = percent + '%'
         }
@@ -647,20 +735,77 @@
     }
 
 
-    initCountdown('.info__match-next-time', '2025-10-01T12:00:00', '2025-10-20T12:00:00')
+    function setProgress(el, points) {
+        const checkpoints = [
+            { p: 0, v: 0 },
+            { p: 5, v: 8.4 },
+            { p: 10, v: 21.2 },
+            { p: 25, v: 34.1 },
+            { p: 40, v: 46.8 },
+            { p: 45, v: 59.4 },
+            { p: 50, v: 72.2 },
+            { p: 85, v: 85 },
+            { p: 100, v: 96 },
+        ];
+
+        if (window.innerWidth <= 600) {
+            const newValues = [8, 20.9, 33.9, 46.9, 59.8, 72.8, 85.6, 98.3];
+            checkpoints.forEach((point, index) => {
+                if (index > 0) point.v = newValues[index - 1];
+            });
+        }
+
+        const getProgress = (points) => {
+            if (points <= checkpoints[0].p) return checkpoints[0].v;
+            if (points >= checkpoints.at(-1).p) return checkpoints.at(-1).v;
+
+            for (let i = 0; i < checkpoints.length - 1; i++) {
+                const { p: p1, v: v1 } = checkpoints[i];
+                const { p: p2, v: v2 } = checkpoints[i + 1];
+                if (points >= p1 && points <= p2) {
+                    const ratio = (points - p1) / (p2 - p1);
+                    return v1 + ratio * (v2 - v1);
+                }
+            }
+            return 0; // запасний варіант, щоб уникнути undefined
+        }
+
+        const progressValue = getProgress(points);
+        const percent = Number.isFinite(progressValue) ? progressValue.toFixed(2) : "0";
+        const topCounterOfPoints = document.querySelector(".progress-top")
 
 
+        const fadeValue = window.innerWidth <= 600 ? 98 : 91
 
-    function setProgress(el, percent) {
+        if(points >= fadeValue){
+            topCounterOfPoints.classList.add('hide')
+        }
+
         const fill = el.querySelector('.progress-fill');
         const label = el.querySelector('.progress-label');
+
         fill.style.height = percent + "%";
-        label.textContent = `${percent}/100`;
+        topCounterOfPoints.textContent = `${points}/100`
+        label.textContent = `${points}/100`;
     }
 
-// приклад використання:
-    const bar = document.querySelector('.progress-bar');
-    setProgress(bar, 75);
+    function setCardState(cards, userPrizes = [], userPoints){
+        cards.forEach(card => {
+            const pointsCardValue = Number(card.getAttribute('data-amount-points'));
+            let isTakenPrize = userPrizes.includes(id => id === pointsCardValue)
+
+            if(userPoints >= pointsCardValue){
+                if(isTakenPrize){
+                    setWonItem(card)
+                }
+                setActiveItem(card)
+            }else{
+                setLockItem(card)
+            }
+
+        })
+    }
+
 
 // TEST
 
@@ -721,5 +866,17 @@
     btnWonAll.addEventListener('click', () => {
         prizeItems.forEach(item => setWonItem(item));
     });
+
+    document.querySelectorAll('[data-test-id]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const id = Number(btn.getAttribute('data-test-id'));
+            showNextMatch(id);
+        });
+    });
+
+    document.querySelector(".match-test").addEventListener('click', () => {
+        document.querySelector(".menu-test-match").classList.toggle("hide");
+    })
+
 
 })();

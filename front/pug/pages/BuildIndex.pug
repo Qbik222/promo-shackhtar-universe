@@ -6,7 +6,7 @@ button.menu-btn menu
     button.active-all active all
     button.lock-all lock all
     button.won-all won all
-    .menu-test-popup
+    .menu-test-popup.hide
         button.popup-test(data-popup="100PointsPopup") 100Points Take
         button.popup-test(data-popup="85PointsPopup") 85Points Take
         button.popup-test(data-popup="50PointsPopup") 50Points Take
@@ -15,6 +15,22 @@ button.menu-btn menu
         button.popup-test(data-popup="25PointsPopup") 25Points Take
         button.popup-test(data-popup="10PointsPopup") 10Points Take
         button.popup-test(data-popup="5PointsPopup") 5Points Take
+    button.match-test matches
+    .menu-test-match.hide
+        button(data-test-id="1") 1
+        button(data-test-id="2") 2
+        button(data-test-id="3") 3
+        button(data-test-id="4") 4
+        button(data-test-id="5") 5
+        button(data-test-id="6") 6
+        button(data-test-id="7") 7
+        button(data-test-id="8") 8
+        button(data-test-id="9") 9
+        button(data-test-id="10") 10
+        button(data-test-id="11") 11
+        button(data-test-id="12") 12
+        button(data-test-id="13") 13
+
 .fav-page.loading
     .spinner-overlay
         .spinner
@@ -28,7 +44,7 @@ button.menu-btn menu
                    span.welcome__title-top-item :
                .welcome__title-center(data-translate="welcomeTitleCenter") новий
                .welcome__title-bottom(data-translate="welcomeTitleBottom") всесвіт гри
-           a.welcome__btn.btn.unauth-msg(data-translate="authBtn" href="/login" data-promo="shackhtar_universe_ua_20102025" data-button="auth_top") авторизуватись
+           a.welcome__btn.btn.unauth-msg(data-translate="joinBtn" href="/login" data-promo="shackhtar_universe_ua_20102025" data-button="auth_top") авторизуватись
            button.welcome__btn.btn.part-btn.hide(data-translate="joinBtn" data-promo="shackhtar_universe_ua_20102025" data-button="takePart_top") взяти участь
            a.welcome__btn.btn.btn-join.hide(data-translate="playBtn" href="#" data-promo="shackhtar_universe_ua_20102025" data-button="playBtn_top") до подій
        .welcome__right
@@ -53,18 +69,223 @@ button.menu-btn menu
                 .info__match-left
                     .info__match-logo
                         img(src="img/info/logo.png" alt="Favbet")
-                    a.info__match-btn.btn(href="#" data-translate="toMatchLink") до матчу
+                    a.info__match-btn.btn(href="/sports/top/shakhtard/" data-translate="toMatchLink") до матчу
                 .info__match-right
                     .info__match-teams
-                        .info__match-team1 Shakhtar
+                        .info__match-team1(data-translate="shakhtar") Shakhtar
                         .info__match-separator
-                        .info__match-team2 Rukh
+                        .info__match-team2(data-translate="legia") Legia
                     .info__match-date
-                        .info__match-date-text(data-translate="infoMatchText") Прем’єр-ліга України
-                        .info__match-date-time 28 вересня 2025 р. 18:00
+                        .info__match-date-text(data-translate="infoMatchText") Ліга конференцій
+                        .info__match-date-time(data-translate="matchDate_1") 23.10.2025, 19:45
                     .info__match-next
                         .info__match-next-text(data-translate="infoMatchNext") До наступного матчу Шахтаря
                         .info__match-next-time
+
+            .info__match(data-match="2")
+                .info__match-left
+                    .info__match-logo
+                        img(src="img/info/logo.png" alt="Favbet")
+                    a.info__match-btn.btn(href="/sports/top/shakhtard/" data-translate="toMatchLink") до матчу
+                .info__match-right
+                    .info__match-teams
+                        .info__match-team1(data-translate="shakhtar") Shakhtar
+                        .info__match-separator
+                        .info__match-team2(data-translate="kudrivka") FK Kudrivka
+                    .info__match-date
+                        .info__match-date-text(data-translate="infoMatchText") Прем'єр-ліга України
+                        .info__match-date-time(data-translate="matchDate_2") 25.10.2025 18:00
+                    .info__match-next
+                        .info__match-next-text(data-translate="infoMatchNext") До наступного матчу Шахтаря
+                        .info__match-next-time
+
+            .info__match(data-match="3")
+                .info__match-left
+                    .info__match-logo
+                        img(src="img/info/logo.png" alt="Favbet")
+                    a.info__match-btn.btn(href="/sports/top/shakhtard/" data-translate="toMatchLink") до матчу
+                .info__match-right
+                    .info__match-teams
+                        .info__match-team1(data-translate="dynamo") FC Dynamo K.
+                        .info__match-separator
+                        .info__match-team2(data-translate="shakhtar") Shakhtar
+                    .info__match-date
+                        .info__match-date-text(data-translate="infoMatchText") Кубок України
+                        .info__match-date-time(data-translate="matchDate_3") 28.10.2025, 17:00
+                    .info__match-next
+                        .info__match-next-text(data-translate="infoMatchNext") До наступного матчу Шахтаря
+                        .info__match-next-time
+
+            .info__match(data-match="4")
+                .info__match-left
+                    .info__match-logo
+                        img(src="img/info/logo.png" alt="Favbet")
+                    a.info__match-btn.btn(href="/sports/top/shakhtard/" data-translate="toMatchLink") до матчу
+                .info__match-right
+                    .info__match-teams
+                        .info__match-team1(data-translate="shakhtar") Shakhtar
+                        .info__match-separator
+                        .info__match-team2(data-translate="dynamo") FC Dynamo K.
+                    .info__match-date
+                        .info__match-date-text(data-translate="infoMatchText") Прем'єр-ліга
+                        .info__match-date-time(data-translate="matchDate_4") 01.11.2025, 18:00
+                    .info__match-next
+                        .info__match-next-text(data-translate="infoMatchNext") До наступного матчу Шахтаря
+                        .info__match-next-time
+
+            .info__match(data-match="5")
+                .info__match-left
+                    .info__match-logo
+                        img(src="img/info/logo.png" alt="Favbet")
+                    a.info__match-btn.btn(href="/sports/top/shakhtard/" data-translate="toMatchLink") до матчу
+                .info__match-right
+                    .info__match-teams
+                        .info__match-team1(data-translate="shakhtar") Shakhtar
+                        .info__match-separator
+                        .info__match-team2(data-translate="breidablik") Breidablik
+                    .info__match-date
+                        .info__match-date-text(data-translate="infoMatchText") Ліга конференцій
+                        .info__match-date-time(data-translate="matchDate_5") 06.11.2025, 19:45
+                    .info__match-next
+                        .info__match-next-text(data-translate="infoMatchNext") До наступного матчу Шахтаря
+                        .info__match-next-time
+
+            .info__match(data-match="6")
+                .info__match-left
+                    .info__match-logo
+                        img(src="img/info/logo.png" alt="Favbet")
+                    a.info__match-btn.btn(href="/sports/top/shakhtard/" data-translate="toMatchLink") до матчу
+                .info__match-right
+                    .info__match-teams
+                        .info__match-team1(data-translate="shakhtar") Shakhtar
+                        .info__match-separator
+                        .info__match-team2(data-translate="poltava") SC Poltava
+                    .info__match-date
+                        .info__match-date-text(data-translate="infoMatchText") Прем'єр-ліга України
+                        .info__match-date-time(data-translate="matchDate_6") 08.11.2025, 18:00
+                    .info__match-next
+                        .info__match-next-text(data-translate="infoMatchNext") До наступного матчу Шахтаря
+                        .info__match-next-time
+
+            .info__match(data-match="7")
+                .info__match-left
+                    .info__match-logo
+                        img(src="img/info/logo.png" alt="Favbet")
+                    a.info__match-btn.btn(href="/sports/top/shakhtard/" data-translate="toMatchLink") до матчу
+                .info__match-right
+                    .info__match-teams
+                        .info__match-team1(data-translate="obolon") Obolon
+                        .info__match-separator
+                        .info__match-team2(data-translate="shakhtar") Shakhtar
+                    .info__match-date
+                        .info__match-date-text(data-translate="infoMatchText") Прем'єр-ліга України
+                        .info__match-date-time(data-translate="matchDate_7") 22.11.2025, 18:00
+                    .info__match-next
+                        .info__match-next-text(data-translate="infoMatchNext") До наступного матчу Шахтаря
+                        .info__match-next-time
+
+            .info__match(data-match="8")
+                .info__match-left
+                    .info__match-logo
+                        img(src="img/info/logo.png" alt="Favbet")
+                    a.info__match-btn.btn(href="/sports/top/shakhtard/" data-translate="toMatchLink") до матчу
+                .info__match-right
+                    .info__match-teams
+                        .info__match-team1(data-translate="shamrock") Shamrock Rovers
+                        .info__match-separator
+                        .info__match-team2(data-translate="shakhtar") Shakhtar
+                    .info__match-date
+                        .info__match-date-text(data-translate="infoMatchText") Ліга конференцій
+                        .info__match-date-time(data-translate="matchDate_8") 27.11.2025, 22:00
+                    .info__match-next
+                        .info__match-next-text(data-translate="infoMatchNext") До наступного матчу Шахтаря
+                        .info__match-next-time
+
+            .info__match(data-match="9")
+                .info__match-left
+                    .info__match-logo
+                        img(src="img/info/logo.png" alt="Favbet")
+                    a.info__match-btn.btn(href="/sports/top/shakhtard/" data-translate="toMatchLink") до матчу
+                .info__match-right
+                    .info__match-teams
+                        .info__match-team1(data-translate="shakhtar") Shakhtar
+                        .info__match-separator
+                        .info__match-team2(data-translate="kryvbas") Kryvbas
+                    .info__match-date
+                        .info__match-date-text(data-translate="infoMatchText") Прем'єр-ліга України
+                        .info__match-date-time(data-translate="matchDate_9") 29.11.2025, 18:00
+                    .info__match-next
+                        .info__match-next-text(data-translate="infoMatchNext") До наступного матчу Шахтаря
+                        .info__match-next-time
+
+            .info__match(data-match="10")
+                .info__match-left
+                    .info__match-logo
+                        img(src="img/info/logo.png" alt="Favbet")
+                    a.info__match-btn.btn(href="/sports/top/shakhtard/" data-translate="toMatchLink") до матчу
+                .info__match-right
+                    .info__match-teams
+                        .info__match-team1(data-translate="kolos") Kolos
+                        .info__match-separator
+                        .info__match-team2(data-translate="shakhtar") Shakhtar
+                    .info__match-date
+                        .info__match-date-text(data-translate="infoMatchText") Прем'єр-ліга України
+                        .info__match-date-time(data-translate="matchDate_10") 06.12.2025, 18:00
+                    .info__match-next
+                        .info__match-next-text(data-translate="infoMatchNext") До наступного матчу Шахтаря
+                        .info__match-next-time
+
+            .info__match(data-match="11")
+                .info__match-left
+                    .info__match-logo
+                        img(src="img/info/logo.png" alt="Favbet")
+                    a.info__match-btn.btn(href="/sports/top/shakhtard/" data-translate="toMatchLink") до матчу
+                .info__match-right
+                    .info__match-teams
+                        .info__match-team1(data-translate="humrun") Humrun Spartans
+                        .info__match-separator
+                        .info__match-team2(data-translate="shakhtar") Shakhtar
+                    .info__match-date
+                        .info__match-date-text(data-translate="infoMatchText") Ліга конференцій
+                        .info__match-date-time(data-translate="matchDate_11") 11.12.2025, 22:00
+                    .info__match-next
+                        .info__match-next-text(data-translate="infoMatchNext") До наступного матчу Шахтаря
+                        .info__match-next-time
+
+            .info__match(data-match="12")
+                .info__match-left
+                    .info__match-logo
+                        img(src="img/info/logo.png" alt="Favbet")
+                    a.info__match-btn.btn(href="/sports/top/shakhtard/" data-translate="toMatchLink") до матчу
+                .info__match-right
+                    .info__match-teams
+                        .info__match-team1(data-translate="shakhtar") Shakhtar
+                        .info__match-separator
+                        .info__match-team2(data-translate="epitsentr") FC Epitsentr
+                    .info__match-date
+                        .info__match-date-text(data-translate="infoMatchText") Прем'єр-ліга України
+                        .info__match-date-time(data-translate="matchDate_12") 13.12.2025 18:00
+                    .info__match-next
+                        .info__match-next-text(data-translate="infoMatchNext") До наступного матчу Шахтаря
+                        .info__match-next-time
+
+            .info__match(data-match="13")
+                .info__match-left
+                    .info__match-logo
+                        img(src="img/info/logo.png" alt="Favbet")
+                    a.info__match-btn.btn(href="/sports/top/shakhtard/" data-translate="toMatchLink") до матчу
+                .info__match-right
+                    .info__match-teams
+                        .info__match-team1(data-translate="shakhtar") Shakhtar
+                        .info__match-separator
+                        .info__match-team2(data-translate="rijeka") Rijeka
+                    .info__match-date
+                        .info__match-date-text(data-translate="infoMatchText") Ліга конференцій
+                        .info__match-date-time(data-translate="matchDate_13") 18.12.2025, 22:00
+                    .info__match-next
+                        .info__match-next-text(data-translate="infoMatchNext") До наступного матчу Шахтаря
+                        .info__match-next-time
+
     .drop
         details.dropdown
             summary(data-translate="detailsBtn") Деталі
@@ -201,13 +422,13 @@ button.menu-btn menu
         .prize__last
             .prize__last-text(data-translate="lastUpd") Останнє оновлення
             .prize__last-upd XX:XX
-        a.prize__btn.btn.unauth-msg(data-translate="authBtn" href="/login" data-promo="shackhtar_universe_ua_20102025" data-button="auth_top") авторизуватись
+        a.prize__btn.btn.unauth-msg(data-translate="joinBtn" href="/login" data-promo="shackhtar_universe_ua_20102025" data-button="auth_top") авторизуватись
         button.prize__btn.btn.part-btn.hide(data-translate="joinBtn" data-promo="shackhtar_universe_ua_20102025" data-button="takePart_top") взяти участь
         a.prize__btn.btn.btn-join.hide(data-translate="playBtn" href="#" data-promo="shackhtar_universe_ua_20102025" data-button="playBtn_top") до подій
         .prize__text(data-translate="prizeText") *Загальний призовий фонд акції «Шахтар: НОВИЙ ВСЕСВІТ ГРИ», вид та розмір бонусної пропозиції визначається та пропонується учасникам виключно на розсуд Організатора та в межах чинної Програми лояльності. Період дії акції – з ХХ.ХХ.2025 до ХХ.ХХ.2026 року. Деталі на favbet.ua
     .drop
         details.dropdown
-            summary(data-translate="rulseBtn") Деталі
+            summary(data-translate="rulseBtn")
             .drop-txt
                 .drop-txt-list(data-translate="rules")
                     p Ставки на футбол – рекомендований варіант для новачків світу беттінга.
