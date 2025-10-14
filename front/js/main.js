@@ -314,10 +314,12 @@
                                     setTimeout(() =>{
                                         toggleTranslates([takeBtn], "loader_ready")
                                         toggleClasses([takeBtn], "done")
-                                        setCardState(prizeItems, res.user.prizes, res.user.points)
-                                        setLastUpdatedText(lastUpd, res.user.lastUpdated, locale);
                                         setTimeout(() =>{
                                             confirmPrize(popup, itemPrize);
+                                            setCardState(prizeItems, res.user.prizes, res.user.points)
+                                            setLastUpdatedText(lastUpd, res.user.lastUpdated, locale);
+                                            userPoints = res.user.points;
+                                            setProgress(pointsBar, userPoints)
                                         }, 100)
                                     }, 500)
                                 })
@@ -397,6 +399,7 @@
 
                         lastUpd.classList.remove('hide');
                         setLastUpdatedText(lastUpd, res.lastUpdated, locale);
+                        console.log(res.prizes)
                         setCardState(prizeItems, res.prizes, userPoints)
 
                     } else {
@@ -790,18 +793,21 @@
     }
 
     function setCardState(cards, userPrizes = [], userPoints){
+        // console.log(userPrizes)
         cards.forEach(card => {
             const pointsCardValue = Number(card.getAttribute('data-amount-points'));
-            let isTakenPrize = userPrizes.includes(id => id === pointsCardValue)
+            // console.log(pointsCardValue);
+            let isTakenPrize = userPrizes.includes(pointsCardValue)
+            // console.log(isTakenPrize)
 
-            if(userPoints >= pointsCardValue){
-                if(isTakenPrize){
-                    setWonItem(card)
-                }
-                setActiveItem(card)
-            }else{
-                setLockItem(card)
+            if (isTakenPrize) {
+                setWonItem(card);
+            } else if (userPoints >= pointsCardValue) {
+                setActiveItem(card);
+            } else {
+                setLockItem(card);
             }
+
 
         })
     }
